@@ -26,7 +26,11 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="Droid Explorer" target="1.5" />
+      <module name="demo_main" target="1.8" />
+      <module name="demo_test" target="1.8" />
+      <module name="Droid Explorer" target="1.8" />
+      <module name="jfoenix_main" target="1.8" />
+      <module name="jfoenix_test" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
