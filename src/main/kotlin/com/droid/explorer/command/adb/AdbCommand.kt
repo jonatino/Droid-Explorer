@@ -5,12 +5,13 @@ import com.droid.explorer.command.Command
 /**
  * Created by Jonathan on 4/23/2016.
  */
-abstract class AdbCommand : Command {
+abstract class AdbCommand<T> : Command<T> {
 
-	override inline operator final fun invoke(action: (List<String>) -> Any) {
+	override operator fun invoke(action: (T) -> Any) = (output() as List<T>).forEach { action(it) }
+
+	final fun output(): List<String> {
 		var process = ProcessBuilder("E:\\Dropbox\\Droid Explorer\\src\\main\\resources\\adb.exe", *args).start()
-		val lines = process.inputStream.reader().readLines().filterNot { it.isNullOrEmpty() }
-		action(lines)
+		return process.inputStream.reader().readLines().filterNot { it.isNullOrEmpty() }
 	}
 
 }

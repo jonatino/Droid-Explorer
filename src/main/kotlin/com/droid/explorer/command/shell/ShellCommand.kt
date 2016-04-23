@@ -5,7 +5,7 @@ import com.droid.explorer.command.adb.AdbCommand
 /**
  * Created by Jonathan on 4/23/2016.
  */
-abstract class ShellCommand : AdbCommand() {
+abstract class ShellCommand<T> : AdbCommand<T>() {
 
 	abstract val shellArgs: Array<String>
 
