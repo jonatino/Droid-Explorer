@@ -8,12 +8,7 @@ import com.droid.explorer.command.shell.ShellCommand
  */
 class ListFiles(val directory: String, vararg extraArgs: String) : ShellCommand<AndroidFile>() {
 
-	override operator fun invoke(action: (AndroidFile) -> Any) {
-		output().forEach {
-			val fileData = it.split(" ").filterNot { it.isNullOrEmpty() }
-			action(AndroidFile(fileData[fileData.lastIndex], "", fileData[0]))
-		}
-	}
+	override operator fun invoke(action: (AndroidFile) -> Any) = output().forEach { action(AndroidFile.parse(it)) }
 
 	override val shellArgs = arrayOf("ls", *extraArgs, directory)
 
