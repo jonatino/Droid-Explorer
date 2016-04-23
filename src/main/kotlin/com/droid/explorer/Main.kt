@@ -1,19 +1,16 @@
 package com.droid.explorer
 
+import com.droid.explorer.command.shell.impl.ListAllFiles
+import com.droid.explorer.command.shell.impl.ListFiles
+
+
 /**
  * Created by Jonathan on 4/20/2016.
  */
 fun main(args: Array<String>) {
-	executeAdb("devices")
-	executeShell("pwd")
-	executeShell("ls", "/data/data")
+	ListAllFiles("/data")({ println(it) })
+
+	ListFiles("/storage/emulated/0")({ println(it) })
+
+
 }
-
-fun executeShell(vararg command: String) = executeAdb("shell", "su", "root", *command)
-
-fun executeAdb(vararg command: String) {
-	var process = ProcessBuilder("E:\\Dropbox\\Droid Explorer\\src\\main\\resources\\adb.exe", *command).start()
-	read(process)
-}
-
-fun read(process: Process) = process.inputStream.reader().forEachLine { println(it) }
