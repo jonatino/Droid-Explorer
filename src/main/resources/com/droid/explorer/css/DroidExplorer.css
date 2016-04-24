@@ -61,7 +61,7 @@
 }
 
 .label {
-    -fx-text-fill: black;
+    -fx-text-fill: #FFFFFF;
 }
 
 .titled_label {
@@ -236,11 +236,11 @@
 
 .table-row-cell:filled:selected:focused,
 .table-row-cell:filled:selected {
-    -fx-background-color: transparent;
+    -fx-background-color: #6a6a6a;
 }
 
 .table-view:row-selection .table-row-cell:filled:hover {
-    -fx-background-color: #9f9f9f;
+    -fx-background-color: #e84c3d;
     -fx-background-insets: 0, 0 0 1 0;
     /*-fx-text-fill: -fx-text-inner-color;*/
     -fx-text-fill: #fff;
@@ -249,11 +249,19 @@
 }
 
 .table-view:row-selection .table-row-cell:filled:focused:hover {
-    -fx-background-color: #9f9f9f;
+    -fx-background-color: #e84c3d;
     /*-fx-text-fill: -fx-text-inner-color;*/
     -fx-text-fill: #fff;
     -fx-table-cell-border-color: #9f9f9f;
     -fx-table-header-border-color: #9f9f9f;
+}
+
+.table-view:focused .table-row-cell:filled:selected .table-cell:hover {
+    -fx-background-color: #e84c3d;
+    /*-fx-text-fill: -fx-text-inner-color;*/
+    -fx-text-fill: #fff;
+    -fx-table-cell-border-color: transparent;
+    -fx-table-header-border-color: transparent;
 }
 
 .table-cell {
@@ -346,7 +354,7 @@
 
 .context-menu {
     -fx-skin: "com.sun.javafx.scene.control.skin.ContextMenuSkin";
-    -fx-background-color: #FFFFFF;
+    -fx-background-color: #3d3d3d;
     -fx-background-insets: 0, 1, 2;
     -fx-background-radius: 0 6 6 6, 0 5 5 5, 0 4 4 4;
     /*    -fx-padding: 0.666667em 0.083333em 0.666667em 0.083333em;  8 1 8 1 */

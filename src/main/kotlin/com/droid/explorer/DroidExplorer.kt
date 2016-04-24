@@ -1,6 +1,8 @@
 package com.droid.explorer
 
 import com.droid.explorer.command.shell.impl.ListFiles
+import com.droid.explorer.command.shell.impl.Pull
+import com.droid.explorer.tracking.PathTracking
 import javafx.application.Application
 import javafx.collections.FXCollections
 import javafx.event.EventHandler
@@ -49,11 +51,16 @@ class DroidExplorer : View() {
 	init {
 		title = "Droid Explorer"
 
-		root.setStyle("-fx-background-color: #3d3d3d;");
+		primaryStage.minHeight = 300.0
+		primaryStage.minWidth = 575.0
+
+		root.style = "-fx-background-color: #3d3d3d;";
 
 		name.cellValueFactory = PropertyValueFactory("name")
 		date.cellValueFactory = PropertyValueFactory("date")
 		permissions.cellValueFactory = PropertyValueFactory("permissions")
+
+		fileTable.placeholder = Label("This folder is empty.");
 
 		FX.stylesheets.add(javaClass.getResource("css/DroidExplorer.css").toExternalForm())
 
@@ -62,10 +69,16 @@ class DroidExplorer : View() {
 		refresh.graphic = ImageView(Image(javaClass.getResource("img/refresh.png").toExternalForm()))
 		home.graphic = ImageView(Image(javaClass.getResource("img/home.png").toExternalForm()))
 
+		refresh.setOnAction({ event -> refresh() })
+		home.setOnAction({ event -> navigate("/") })
+
+		//back.setOnAction({ event -> PathTracking.back(this) })
+		//forward.setOnAction({ event -> PathTracking.forward(this) })
+
 		fileTable.onMouseClicked = EventHandler<MouseEvent> { mouseEvent ->
 			if (mouseEvent.clickCount === 2) {
 				val file = fileTable.selectionModel.selectedItem
-				if (file.isDirectory()) {
+				if (file != null && file.isDirectory()) {
 					navigate(file.absolutePath + "/")
 				}
 			}
@@ -74,23 +87,35 @@ class DroidExplorer : View() {
 		fileTable.rowFactory = Callback<TableView<AndroidFile>, TableRow<AndroidFile>> {
 			object : TableRow<AndroidFile>() {
 				override fun updateItem(file: AndroidFile?, paramBoolean: Boolean) {
+					val rowMenu = ContextMenu()
+					val contextItems = ArrayList<MenuItem>()
 					if (file != null) {
-						val rowMenu = ContextMenu()
-						val contextItems = ArrayList<MenuItem>()
-
 						if (file.isDirectory()) {
 							val open = MenuItem("Open", ImageView(Image(javaClass.getResource("img/open.png").toExternalForm())))
 							contextItems.add(open)
 							open.setOnAction({ event -> navigate(file.absolutePath) })
 
 							contextItems.add(MenuItem("Compress", ImageView(Image(javaClass.getResource("img/compress.png").toExternalForm()))))
+							contextItems.add(SeparatorMenuItem())
 						} else {
-							contextItems.add(MenuItem("Download", ImageView(Image(javaClass.getResource("img/download.png").toExternalForm()))))
+							//TODO download multiple files at once?
+							val download = MenuItem("Download", ImageView(Image(javaClass.getResource("img/download.png").toExternalForm())))
+							download.setOnAction({ event -> Pull(file.absolutePath, "C:/Users/Jonathan/Desktop")({ println(it) }) })
+							contextItems.add(download)
 						}
+						contextItems.add(SeparatorMenuItem())
 						contextItems.add(MenuItem("Delete", ImageView(Image(javaClass.getResource("img/delete.png").toExternalForm()))))
-						rowMenu.items.addAll(contextItems)
-						contextMenu = rowMenu
 					}
+					val replace = MenuItem("Upload", ImageView(Image(javaClass.getResource("img/download.png").toExternalForm())))
+					replace.setOnAction({ event ->
+						val files = javafx.stage.FileChooser().showOpenMultipleDialog(primaryStage);
+						if (files != null && files.isNotEmpty()) {
+							files.forEach { (com.droid.explorer.command.shell.impl.Push(it.absolutePath, currentPath))({ println(it) }) }
+						}
+					})
+					contextItems.add(replace)
+					rowMenu.items.addAll(contextItems)
+					contextMenu = rowMenu
 					super.updateItem(file, paramBoolean)
 				}
 			}
@@ -102,24 +127,25 @@ class DroidExplorer : View() {
 	}
 
 	companion object {
-		@JvmStatic var currentPath = "/"
+		var currentPath = "/"
 	}
 
 	fun navigate(path: String) {
+		//PathTracking.add(currentPath, path)
 		currentPath = path
 		refresh()
 	}
 
 	fun refresh() {
+		PathTracking.check(this)
+
 		var path = arrayOf("/", *currentPath.split("/").filterNot { it.isNullOrEmpty() }.toTypedArray())
 		filePath.selectedCrumb = BreadCrumbBar.buildTreeModel(*path)
 
-		println("Hello $currentPath")
 		val list = ArrayList<AndroidFile>()
 
 		ListFiles(currentPath, "-l")({ list.add(it) })
 
-		println(list)
 		fileTable.items = FXCollections.observableArrayList(list)
 	}
 }

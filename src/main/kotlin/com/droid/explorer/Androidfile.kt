@@ -15,13 +15,16 @@ data class AndroidFile(var name: String, var date: String, var permissions: Stri
 	companion object {
 		 fun parse(input: String): AndroidFile {
 			val fileData = input.split(" ").filterNot { input.isNullOrEmpty() }
-			// println(fileData)
+
+			 println(fileData)
 			var name = fileData.last()
 			var date = fileData[fileData.lastIndex - 2] + " " + fileData[fileData.lastIndex - 1]
 			var permissions = fileData.first()
 
 			if (permissions.startsWith("l"))
 				date = fileData[fileData.lastIndex - 4] + " " + fileData[fileData.lastIndex - 3]
+
+			 //TODO breaks if file has space in name -> [-rw-rw-rw-, root, , , , , root, , , , , , , , , , , , 0, 2016-04-24, 01:51, New, file]
 
 			val inputFormat = SimpleDateFormat("yyyy-MM-dd HH:mm")
 			val outputFormat = SimpleDateFormat("M/d/yyyy h:mm a")
