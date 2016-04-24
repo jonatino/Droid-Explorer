@@ -1,18 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import org.controlsfx.control.BreadCrumbBar?>
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="506.0" prefWidth="746.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <TableView fx:id="fileTable" prefHeight="465.0" prefWidth="749.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
-        <columns>
-          <TableColumn fx:id="name" prefWidth="250.0" text="Name" />
-            <TableColumn fx:id="date"  prefWidth="150.0" text="Date" />
-            <TableColumn fx:id="permissions" maxWidth="75.0" minWidth="75.0" prefWidth="75.0" text="Permissions" />
-        </columns>
-      </TableView>
-      <BreadCrumbBar fx:id="filePath" layoutX="-1.0" layoutY="-1.0" prefHeight="26.0" prefWidth="600.0" AnchorPane.bottomAnchor="374.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-   </children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="506.0"
+            prefWidth="746.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <Button fx:id="back" layoutX="5.0" layoutY="5.0" maxHeight="30.0" maxWidth="30.0" minHeight="30.0"
+                minWidth="30.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" AnchorPane.leftAnchor="0.0"
+                AnchorPane.topAnchor="5.0"/>
+        <Button fx:id="refresh" layoutX="75.0" layoutY="5.0" maxHeight="30.0" maxWidth="30.0" minHeight="30.0"
+                minWidth="30.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" AnchorPane.topAnchor="5.0"/>
+        <Button fx:id="home" layoutX="110.0" layoutY="5.0" maxHeight="30.0" maxWidth="30.0" minHeight="30.0"
+                minWidth="30.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" AnchorPane.topAnchor="5.0"/>
+        <Button fx:id="forward" layoutX="40.0" layoutY="5.0" maxHeight="30.0" maxWidth="30.0" minHeight="30.0"
+                minWidth="30.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" AnchorPane.topAnchor="5.0"/>
+        <BreadCrumbBar fx:id="filePath" layoutX="148.0" layoutY="5.0" maxHeight="31.0" prefHeight="31.0"
+                       prefWidth="594.0" styleClass="breadcrumbbar" AnchorPane.rightAnchor="0.0"
+                       AnchorPane.topAnchor="5.0"/>
+        <TableView fx:id="fileTable" layoutY="43.0" prefHeight="463.0" prefWidth="746.0" AnchorPane.bottomAnchor="0.0"
+                   AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="43.0">
+            <columns>
+                <TableColumn fx:id="name" prefWidth="250.0" text="Name"/>
+                <TableColumn fx:id="date" maxWidth="125.0" minWidth="125.0" prefWidth="125.0" text="Date"/>
+                <TableColumn fx:id="permissions" maxWidth="150.0" minWidth="150.0" prefWidth="150.0"
+                             text="Permissions"/>
+            </columns>
+        </TableView>
+    </children>
+    <padding>
+        <Insets bottom="5.0" left="5.0" right="5.0"/>
+    </padding>
 </AnchorPane>

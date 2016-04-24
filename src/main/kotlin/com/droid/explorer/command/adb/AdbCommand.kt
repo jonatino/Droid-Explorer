@@ -10,7 +10,7 @@ abstract class AdbCommand<T> : Command<T> {
 	override operator fun invoke(action: (T) -> Any) = (output() as List<T>).forEach { action(it) }
 
 	final fun output(): List<String> {
-		var process = ProcessBuilder("E:\\Dropbox\\Droid Explorer\\src\\main\\resources\\com\\droid\\explorer\\adb.exe", *args).start()
+		var process = ProcessBuilder("E:\\Dropbox\\Droid Explorer\\src\\main\\resources\\com\\droid\\explorer\\adb\\adb.exe", *args).start()
 		return process.inputStream.reader().readLines().filterNot { it.isNullOrEmpty() }
 	}
 
