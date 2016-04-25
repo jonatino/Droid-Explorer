@@ -43,8 +43,9 @@ class DroidExplorer : View() {
 
 	@FXML lateinit var fileTable: TableView<AndroidFile>
 	@FXML lateinit var name: TableColumn<AndroidFile, String>
-	@FXML lateinit var permissions: TableColumn<AndroidFile, String>
 	@FXML lateinit var date: TableColumn<AndroidFile, String>
+	@FXML lateinit var permissions: TableColumn<AndroidFile, String>
+	@FXML lateinit var type: TableColumn<AndroidFile, String>
 	@FXML lateinit var filePath: BreadCrumbBar<String>
 	@FXML lateinit var back: Button
 	@FXML lateinit var forward: Button
@@ -62,6 +63,7 @@ class DroidExplorer : View() {
 		name.cellValueFactory = PropertyValueFactory("name")
 		date.cellValueFactory = PropertyValueFactory("date")
 		permissions.cellValueFactory = PropertyValueFactory("permissions")
+		type.cellValueFactory = PropertyValueFactory("type")
 
 		fileTable.placeholder = Label("This folder is empty.");
 
@@ -73,14 +75,13 @@ class DroidExplorer : View() {
 		refresh.graphic = ImageView(Image(javaClass.getResource("img/refresh.png").toExternalForm()))
 		home.graphic = ImageView(Image(javaClass.getResource("img/home.png").toExternalForm()))
 
-
 		refresh.setOnAction({ event -> refresh() })
 		home.setOnAction({ event -> navigate("/") })
 
 		back.setOnAction({ event -> PathTracking.back(this) })
 		forward.setOnAction({ event -> PathTracking.forward(this) })
 
-		name.setCellFactory({ column -> FileCell() })
+		name.setCellFactory({ column -> FileCell(this) })
 
 		fileTable.onMouseClicked = EventHandler<MouseEvent> { mouseEvent ->
 			if (mouseEvent.clickCount === 2) {
@@ -110,6 +111,8 @@ class DroidExplorer : View() {
 		val list = ArrayList<AndroidFile>()
 
 		ListFiles(currentPath, "-l").callback { list.add(it) }
+
+		list.sortBy { it.type }
 
 		fileTable.items = FXCollections.observableArrayList(list)
 

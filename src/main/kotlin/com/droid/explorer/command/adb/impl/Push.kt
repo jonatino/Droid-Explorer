@@ -8,9 +8,9 @@ import com.droid.explorer.command.adb.AdbCommand
 class Push(val localFile: String, val remoteFile: String = "") : AdbCommand<String>() {
 
 	override fun callback(action: (String) -> Any) {
-		Mount()
+		Mount().callback {  }
 		super.callback(action)
-		UnMount()
+		UnMount().callback {  }
 	}
 
 	override val args = arrayOf("push", localFile, remoteFile)

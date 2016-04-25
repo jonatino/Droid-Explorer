@@ -1,18 +1,22 @@
 package com.droid.explorer.view
 
+import com.droid.explorer.DroidExplorer
 import com.droid.explorer.command.shell.impl.Pull
+import com.droid.explorer.command.shell.impl.Push
+import com.droid.explorer.tracking.PathTracking
 import javafx.scene.control.ContextMenu
 import javafx.scene.control.MenuItem
 import javafx.scene.control.SeparatorMenuItem
 import javafx.scene.control.TableCell
 import javafx.scene.image.Image
 import javafx.scene.image.ImageView
+import javafx.stage.FileChooser
 import java.util.*
 
 /**
  * Created by Jonathan on 4/24/2016.
  */
-open class FileCell<AndroidFile, String> : TableCell<AndroidFile, String>() {
+open class FileCell<AndroidFile, String>(val droidExplorer: DroidExplorer) : TableCell<AndroidFile, String>() {
 
 	init {
 		/*	itemProperty().addListener({ observable, oldValue, newValue ->
@@ -45,7 +49,7 @@ open class FileCell<AndroidFile, String> : TableCell<AndroidFile, String>() {
 				if (file.isDirectory()) {
 					val open = MenuItem("Open", ImageView(Image(javaClass.getResource("../img/open.png").toExternalForm())))
 					contextItems.add(open)
-					//open.setOnAction({ event -> navigate(file.absolutePath) })
+					open.setOnAction({ event -> droidExplorer.navigate(file.absolutePath) })
 
 					contextItems.add(MenuItem("Compress", ImageView(Image(javaClass.getResource("../img/compress.png").toExternalForm()))))
 					contextItems.add(SeparatorMenuItem())
@@ -58,12 +62,12 @@ open class FileCell<AndroidFile, String> : TableCell<AndroidFile, String>() {
 				contextItems.add(SeparatorMenuItem())
 				contextItems.add(MenuItem("Delete", ImageView(Image(javaClass.getResource("../img/delete.png").toExternalForm()))))
 				val replace = MenuItem("Upload", ImageView(Image(javaClass.getResource("../img/download.png").toExternalForm())))
-				/*		replace.setOnAction({ event ->
-				val files = javafx.stage.FileChooser().showOpenMultipleDialog(primaryStage);
-				if (files != null && files.isNotEmpty()) {
-					files.forEach { Push(it.absolutePath, PathTracking.currentPath).callback { println(it) } }
-				}
-			})*/
+				replace.setOnAction({ event ->
+					val files = FileChooser().showOpenMultipleDialog(droidExplorer.primaryStage);
+					if (files != null && files.isNotEmpty()) {
+						files.forEach { Push(it.absolutePath, PathTracking.currentPath).callback { println(it) } }
+					}
+				})
 				text = file.name
 				if (file.isDirectory()) {
 					graphic = ImageView(Image(javaClass.getResource("../img/folder.png").toExternalForm()))

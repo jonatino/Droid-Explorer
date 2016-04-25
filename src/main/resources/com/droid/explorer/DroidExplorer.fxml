@@ -19,6 +19,7 @@
                 <TableColumn fx:id="name" prefWidth="250.0" text="Name" />
                 <TableColumn fx:id="date" maxWidth="125.0" minWidth="125.0" prefWidth="125.0" text="Date" />
                 <TableColumn fx:id="permissions" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" text="Permissions" />
+                <TableColumn fx:id="type" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Type" />
             </columns>
         </TableView>
     </children>
