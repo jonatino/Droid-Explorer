@@ -8,8 +8,11 @@ import java.util.*
  */
 object PathTracking {
 
-	var currentIndex = -1;
-	val history = ArrayList<String>()
+	var currentPath = "/"
+
+
+	var currentIndex = -1
+	val history = LinkedList<String>()
 
 	val root = Node(null, null, "/")
 	var node = root
@@ -20,28 +23,35 @@ object PathTracking {
 		} else {
 			droidExplorer.forward.isDisable = true
 		}
-		if (history.isNotEmpty() && currentIndex > 1) {
+		if (currentIndex > 0&& history.isNotEmpty()) {
 			droidExplorer.back.isDisable = false
 		} else {
 			droidExplorer.back.isDisable = true
 		}
-		println(history)
 	}
 
-	fun forward(droidExplorer: DroidExplorer, node: Node<String>) {
-		if (node.right != null) {
-			val right = node.right!!
-			right.left = node
-			droidExplorer.navigate(right.value)
-		}
+	fun forward(droidExplorer: DroidExplorer) {
+
 	}
 
-	fun back(droidExplorer: DroidExplorer, node: Node<String>) {
-		if (node.left != null) {
-			val left = node.left!!
-			left.right = node
-			droidExplorer.navigate(left.value)
+	fun back(droidExplorer: DroidExplorer) {
+		currentIndex--
+		println("Going back to: ${history[currentIndex]}")
+		droidExplorer.navigate(history[currentIndex], false)
+	}
+
+	fun add(path: String) {
+		//println("History $history")
+		//println("History $currentIndex")
+		//println("Wanting to add $path")
+		//if (history.isNotEmpty())
+		//println("Last Item ${history.get(currentIndex)} ${currentPath}")
+		if (currentIndex > 0 && history.get(currentIndex) == path) {
+			println("Dont add it")
+		} else {
+			history.add(path)
 		}
+		currentIndex = history.size-1
 	}
 
 }

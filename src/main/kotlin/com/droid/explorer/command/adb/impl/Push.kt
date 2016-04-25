@@ -7,10 +7,10 @@ import com.droid.explorer.command.adb.AdbCommand
  */
 class Push(val localFile: String, val remoteFile: String = "") : AdbCommand<String>() {
 
-	override fun invoke(action: (String) -> Any) {
-		Mount()({})
-		super.invoke(action)
-		UnMount()({})
+	override fun callback(action: (String) -> Any) {
+		Mount()
+		super.callback(action)
+		UnMount()
 	}
 
 	override val args = arrayOf("push", localFile, remoteFile)

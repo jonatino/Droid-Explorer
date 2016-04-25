@@ -7,6 +7,6 @@ interface Command<T> {
 
 	val args: Array<String>
 
-	operator fun invoke(action: (T) -> Any)
+	fun callback(action: (T) -> Any)
 
 }

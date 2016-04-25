@@ -1,6 +1,6 @@
 .button {
     -fx-skin: "com.sun.javafx.scene.control.skin.ButtonSkin";
-    -fx-background-color: rgb(71, 71, 71);
+    -fx-background-color: transparent;
     -fx-background-radius: 0 0 0 0;
     -fx-border-radius: 0 0 0 0;
     -fx-text-fill: white;
@@ -20,336 +20,6 @@
 
 .button:armed {
     -fx-background-color: #4681d9;
-}
-
-.button:default {
-    -fx-base: -fx-accent;
-}
-
-.button:disabled {
-    -fx-opacity: /*-fx-disabled-opacity*/
-    0.35;
-}
-
-.button:show-mnemonics .mnemonic-underline {
-    -fx-stroke: -fx-text-fill;
-}
-
-.titled-pane {
-    -fx-text-fill: white;
-    -fx-border-color: #FFFFFF;
-    -fx-background-radius: 0 0 0 0;
-    -fx-border-radius: 0 0 0 0;
-}
-
-.titled-pane > .title {
-    -fx-background-color: #3F6D98;
-    -fx-background-radius: 0 0 0 0;
-    -fx-border-radius: 0 0 0 0;
-    /* -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,100) , 5, 0 , 0 , 0 );*/
-}
-
-.titled-pane:focused > .title {
-    -fx-color: -fx-focus-color;
-}
-
-.titled-pane > *.content {
-    -fx-background-color: #FFFFFF;
-    -fx-background-radius: 0 0 0 0;
-    -fx-border-radius: 0 0 0 0;
-    -fx-text-fill: #A3A5A7;
-}
-
-.label {
-    -fx-text-fill: #FFFFFF;
-}
-
-.titled_label {
-    -fx-text-fill: #3F6D98;
-}
-
-.titled-pane:focused > .title > .arrow-button .arrow {
-    -fx-background-color: white;
-}
-
-.check-box {
-    -fx-label-padding: 0.0em 0.0em 0.0em 0.416667em;
-    /* 0 0 0 5 */
-    -fx-text-fill: black;
-}
-
-.check-box:focused {
-    -fx-color: -fx-focused-base;
-}
-
-.check-box .box {
-    -fx-background-color: #d3d3d3;
-    -fx-padding: 0.25em;
-    /* 3 -- padding from the outside edge to the mark */
-    -fx-background-radius: 0 0 0 0;
-    -fx-border-radius: 0 0 0 0;
-}
-
-.check-box .mark {
-    -fx-label-padding: 0.0em 0.0em 0.0em 0.416667em;
-    /* 0 0 0 5 */
-    -fx-background-color: transparent;
-    -fx-padding: 0.333333em;
-    /* 4 -- this is half the size of the mark */
-    -fx-shape: "M0,4H2L3,6L6,0H8L4,8H2Z";
-    -fx-background-radius: 0 0 0 0;
-    -fx-border-radius: 0 0 0 0;
-}
-
-.check-box:indeterminate .mark {
-    -fx-background-color: #3F6D98;
-    -fx-shape: "M0,0H8V2H0Z";
-    -fx-scale-shape: false;
-}
-
-.check-box:selected .mark {
-    -fx-background-color: #3F6D98;
-}
-
-.check-box:show-mnemonics .mnemonic-underline {
-    -fx-stroke: -fx-text-fill;
-}
-
-.color-picker {
-    -fx-skin: "com.sun.javafx.scene.control.skin.ColorPickerSkin";
-}
-
-.color-picker .arrow-button {
-    -fx-background-color: null;
-    -fx-padding: 0.5em 0.416667em 0.5em 0.416667em;
-    /* 6 5 6 5 */
-    -fx-background-insets: 0.0;
-    -fx-background-radius: 0.0;
-}
-
-.separator *.line {
-    -fx-border-style: solid;
-    -fx-border-width: 0 1 1 0;
-    -fx-border-color: #393B3D;
-}
-
-.tab-pane {
-    -fx-tab-min-height: 3em;
-    /* 24 */
-    -fx-tab-max-height: 3em;
-    /* 24 */
-}
-
-.tab .tab-label {
-    -fx-background-color: transparent;
-    -fx-alignment: CENTER;
-    -fx-text-fill: black;
-}
-
-.tab {
-    -fx-background-insets: 0.0;
-    -fx-background-radius: 0.0;
-    -fx-background-color: #FFFFFF;
-}
-
-.tab:selected {
-    -fx-background-color: #3F6D98;
-}
-
-.tab:selected .tab-label {
-    -fx-alignment: CENTER;
-    -fx-text-fill: white;
-}
-
-.tab:focused {
-    -fx-focus-color: transparent;
-}
-
-.tab {
-    -fx-padding: 0 30 0 30;
-}
-
-.tab-pane *.tab-header-background {
-    -fx-background-color: #FFFFFF;
-}
-
-.tab-pane:top *.tab-header-area {
-    -fx-background-insets: 0, 0 0 1 0;
-    -fx-padding: 0.0em 0.166667em 0.0em 0.0em;
-}
-
-.tab:selected .focus-indicator {
-    -fx-focus-color: transparent;
-    -fx-border-color: transparent;
-}
-
-.table-view {
-    -fx-skin: "com.sun.javafx.scene.control.skin.TableViewSkin";
-    -fx-background-color: #474747;
-    -fx-background-insets: 0, 1;
-    -fx-padding: 1;
-    -fx-text-fill: #4883ba;
-    -fx-table-cell-border-color: transparent;
-    -fx-table-header-border-color: green;
-}
-
-.table-view .text-field {
-    -fx-text-fill: #fff;
-}
-
-.table-view .text-area {
-    -fx-text-fill: #fff;
-}
-
-.table-view .column-header .label {
-    -fx-text-fill: white;
-    -fx-font-weight: normal;
-    -fx-font-size: 14.5;
-}
-
-.table-row-cell {
-    -fx-skin: "com.sun.javafx.scene.control.skin.TableRowSkin";
-    -fx-background-insets: 0, 0 0 1 0;
-    -fx-padding: 0.0em;
-    /* 0 */
-    -fx-text-fill: #fff;
-    -fx-text-inner-color: #fff;
-    -fx-background-color: #474747;
-    -fx-table-cell-border-color: transparent;
-    -fx-table-header-border-color: transparent;
-}
-
-.table-row-cell:focused {
-    -fx-background-insets: 0, 1, 2;
-    -fx-background-color: transparent;
-    -fx-table-cell-border-color: transparent;
-    -fx-table-header-border-color: transparent;
-}
-
-.table-view:focused .table-row-cell:filled:selected .table-cell {
-    -fx-background-color: #6a6a6a;
-    -fx-text-fill: #fff;
-}
-
-
-/* When the TableView is _not_ focused, we show alternate selection colors */
-
-.table-row-cell:filled:selected:focused,
-.table-row-cell:filled:selected {
-    -fx-background-color: #6a6a6a;
-}
-
-.table-view:row-selection .table-row-cell:filled:hover {
-    -fx-background-color: #e84c3d;
-    -fx-background-insets: 0, 0 0 1 0;
-    /*-fx-text-fill: -fx-text-inner-color;*/
-    -fx-text-fill: #fff;
-    -fx-table-cell-border-color: transparent;
-    -fx-table-header-border-color: transparent;
-}
-
-.table-view:row-selection .table-row-cell:filled:focused:hover {
-    -fx-background-color: #e84c3d;
-    /*-fx-text-fill: -fx-text-inner-color;*/
-    -fx-text-fill: #fff;
-    -fx-table-cell-border-color: #9f9f9f;
-    -fx-table-header-border-color: #9f9f9f;
-}
-
-.table-view:focused .table-row-cell:filled:selected .table-cell:hover {
-    -fx-background-color: #e84c3d;
-    /*-fx-text-fill: -fx-text-inner-color;*/
-    -fx-text-fill: #fff;
-    -fx-table-cell-border-color: transparent;
-    -fx-table-header-border-color: transparent;
-}
-
-.table-cell {
-    -fx-skin: "com.sun.javafx.scene.control.skin.TableCellSkin";
-    -fx-padding: 0.166667em;
-    /* 2px, plus border adds 1px */
-    -fx-background-color: transparent;
-    -fx-border-width: 0.083333em;
-    /* 1 */
-    -fx-cell-size: 2.0em;
-    /* 24 */
-    /* -fx-text-fill: -fx-text-inner-color;*/
-    -fx-text-fill: #efefef;
-    -fx-font-size: 12.5;
-    -fx-font-weight: normal;
-    -fx-table-cell-border-color: transparent;
-    -fx-table-header-border-color: transparent;
-}
-
-.table-view .column-header,
-.table-view .filler {
-    -fx-text-fill: -fx-selection-bar-text;
-    -fx-font-size: 1.083333em;
-    /* 13pt - 1 more than the default font */
-    -fx-size: 36px;
-    -fx-background-color: #3d3d3d;
-    -fx-border-width: 0 0 4;
-    -fx-border-color: transparent transparent #e84c3d transparent;
-}
-
-.table-view .column-header .sort-order {
-    -fx-font-size: 0.916667em;
-    /* 11pt - 1 less than the default font */
-}
-
-.table-view .show-hide-columns-button {
-    -fx-background-color: -fx-body-color;
-}
-
-.table-view .show-hide-column-image {
-    -fx-background-color: -fx-mark-highlight-color, -fx-mark-color;
-    -fx-background-insets: 1 0 -1 0, 0;
-    -fx-padding: 0.25em;
-    /* 3px */
-    -fx-shape: "M398.902,298.045c0.667,0,1.333,0,2,0c0,0.667,0,1.333,0,2c0.667,0,1.333,0,2,0c0,0.667,0,1.333,0,2c-0.667,0-1.333,0-2,0c0,0.666,0,1.332,0,1.999c-0.667,0-1.333,0-2,0c0-0.667,0-1.333,0-1.999c-0.666,0-1.333,0-1.999,0c0-0.667,0-1.334,0-2c0.666,0,1.333,0,1.999,0C398.902,299.378,398.902,298.711,398.902,298.045z";
-}
-
-
-/*.nested-column-header .column-header {
-    -fx-background-color: transparent;
-}*/
-
-
-/* When a column is being 'dragged' to be placed in a different position, there
-   is a region that follows along the column header area to indicate where the
-   column will be dropped. This region can be styled using the .column-drag-header
-   name. */
-
-.table-view .column-drag-header {
-    -fx-background: -fx-accent;
-    -fx-background-color: -fx-selection-bar;
-    -fx-border-color: transparent;
-    -fx-opacity: 0.6;
-}
-
-
-/* Semi-transparent gameUI to indicate the column that is currently being moved */
-
-.table-view .column-overlay {
-    -fx-background-color: darkgray;
-    -fx-opacity: 0.3;
-}
-
-.table-view .arrow {
-    -fx-background-color: -fx-mark-highlight-color, -fx-mark-color;
-    -fx-background-insets: 1 0 -1 0, 0;
-    -fx-padding: 0.25em 0.3125em 0.25em 0.3125em;
-    /* 3 3.75 3 3.75 */
-    -fx-shape: "M 0 0 h 7 l -3.5 4 z";
-}
-
-
-/* This is shown when the table has no rows and/or no columns. */
-
-.table-view .empty-table {
-    -fx-background-color: white;
-    -fx-font-size: 1.166667em;
-    /* 14pt - 2 more than the default font */
 }
 
 .context-menu {
@@ -383,75 +53,259 @@
     -fx-stroke: -fx-text-fill;
 }
 
-.toggle-button {
-    -fx-skin: "com.sun.javafx.scene.control.skin.ToggleButtonSkin";
-    -fx-background-color: -fx-shadow-highlight-color, -fx-outer-border, -fx-inner-border, -fx-body-color;
-    -fx-padding: 0.166667em 0.833333em 0.25em 0.833333em;
-    /* 2 10 3 10 */
-    -fx-text-fill: black;
-    -fx-alignment: CENTER;
-    -fx-background-insets: 0.0;
-    -fx-background-radius: 0.0;
-}
-
-.toggle-button:focused {
-    -fx-background-color: #3F6D98;
-    -fx-text-fill: white;
-}
-
-.toggle-button:armed {
-    -fx-background-color: #3F6D98;
-    -fx-text-fill: white;
-}
-
-.toggle-button:selected {
-    -fx-text-fill: white;
-    -fx-background-color: #3F6D98;
-    -fx-background-insets: 0.0;
-    -fx-background-radius: 0.0;
-}
-
-.toggle-button:selected:focused {
-    -fx-background-color: #3F6D98;
-    -fx-background-insets: 0.0;
-    -fx-text-fill: white;
-    -fx-background-radius: 0.0;
-    -fx-alignment: CENTER;
-}
-
-.toggle-button:disabled {
-    -fx-opacity: -fx-disabled-opacity;
-}
-
-.toggle-button:show-mnemonics .mnemonic-underline {
-    -fx-stroke: -fx-text-fill;
-}
-
-.auth {
-    -fx-background-color: #FFFFFF;
-}
-
-.text-input.error {
-    -fx-focus-color: #d35244;
-    -fx-faint-focus-color: #d3524422;
-    -fx-highlight-fill: -fx-accent;
-    -fx-highlight-text-fill: white;
-    -fx-background-color: -fx-focus-color, -fx-control-inner-background, -fx-faint-focus-color, linear-gradient(from 0px 0px to 0px 5px, derive(-fx-control-inner-background, -9%), -fx-control-inner-background);
-    -fx-background-insets: -0.2, 1, -1.4, 3;
-    -fx-background-radius: 3, 2, 4, 0;
-    -fx-prompt-text-fill: transparent;
-}
-
-.slider .track {
-    -fx-background-color: null;
-    /* Hide the track */
-    -fx-background-insets: 1 0 -1 0, 0, 1;
-    -fx-background-radius: 2.5, 2.5, 1.5;
-    -fx-padding: 0.208333em;
-    /* 2.5 */
-}
-
 .breadcrumbbar {
     -fx-border-width: 1 1 1 1;
     -fx-border-color: #494949 #494949 #494949 #494949;
+}
+
+.table-view {
+    -fx-skin: "com.sun.javafx.scene.control.skin.TableViewSkin";
+    -fx-background-color: #474747;
+    -fx-background-insets: 0, 1;
+    -fx-padding: 1;
+    -fx-text-fill: #4883ba;
+    -fx-table-cell-border-color: transparent;
+    -fx-table-header-border-color: green;
+}
+
+.table-view .text-field {
+    -fx-text-fill: #fff;
+}
+
+.table-view .text-area {
+    -fx-text-fill: #fff;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: white;
+    -fx-font-weight: normal;
+    -fx-font-size: 14.5;
+}
+
+.table-row-cell {
+    -fx-text-fill: #fff;
+    -fx-background-color: #474747;
+    -fx-border-width: 1 1 1 1;
+    -fx-border-color: transparent transparent #3a3a3a transparent;
+}
+
+.table-row-cell:focused {
+    -fx-background-insets: 0, 1, 2;
+    -fx-background-color: transparent;
+    -fx-table-cell-border-color: transparent;
+    -fx-table-header-border-color: transparent;
+}
+
+.table-view:focused .table-row-cell:filled:selected .table-cell {
+    -fx-background-color: #6a6a6a;
+    -fx-text-fill: #fff;
+}
+
+/* When the TableView is _not_ focused, we show alternate selection colors */
+
+.table-row-cell:filled:selected:focused,
+.table-row-cell:filled:selected {
+    -fx-background-color: #6a6a6a;
+}
+
+.table-view:row-selection .table-row-cell:filled:hover {
+    -fx-background-color: #6ab344;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-text-fill: #fff;
+    -fx-table-cell-border-color: transparent;
+    -fx-table-header-border-color: transparent;
+}
+
+.table-view:row-selection .table-row-cell:filled:focused:hover {
+    -fx-background-color: #6ab344;
+    -fx-text-fill: #fff;
+    -fx-table-cell-border-color: #9f9f9f;
+    -fx-table-header-border-color: #9f9f9f;
+}
+
+.table-view:focused .table-row-cell:filled:selected .table-cell:hover {
+    -fx-background-color: #6ab344;
+    -fx-text-fill: #fff;
+    -fx-table-cell-border-color: transparent;
+    -fx-table-header-border-color: transparent;
+}
+
+.table-cell {
+    -fx-skin: "com.sun.javafx.scene.control.skin.TableCellSkin";
+    -fx-padding: 0.166667em;
+    -fx-background-color: transparent;
+    -fx-border-width: 0.083333em;
+    -fx-cell-size: 2.0em;
+    -fx-text-fill: #efefef;
+    -fx-font-size: 12.5;
+    -fx-font-weight: normal;
+    -fx-table-cell-border-color: #3a3a3a;
+    -fx-table-header-border-color: transparent;
+}
+
+.table-view .column-header,
+.table-view .filler {
+    -fx-text-fill: #fff;
+    -fx-font-size: 1.083333em;
+    /* 13pt - 1 more than the default font */
+    -fx-size: 36px;
+    -fx-background-color: #3d3d3d;
+    -fx-border-width: 0 0 4;
+    -fx-border-color: transparent transparent #6ab344 transparent;
+}
+
+.table-view .column-header .sort-order {
+    -fx-font-size: 0.916667em;
+    /* 11pt - 1 less than the default font */
+}
+
+.table-view .show-hide-columns-button {
+    -fx-background-color: -fx-body-color;
+}
+
+.table-view .show-hide-column-image {
+    -fx-background-color: -fx-mark-highlight-color, -fx-mark-color;
+    -fx-background-insets: 1 0 -1 0, 0;
+    -fx-padding: 0.25em;
+    /* 3px */
+    -fx-shape: "M398.902,298.045c0.667,0,1.333,0,2,0c0,0.667,0,1.333,0,2c0.667,0,1.333,0,2,0c0,0.667,0,1.333,0,2c-0.667,0-1.333,0-2,0c0,0.666,0,1.332,0,1.999c-0.667,0-1.333,0-2,0c0-0.667,0-1.333,0-1.999c-0.666,0-1.333,0-1.999,0c0-0.667,0-1.334,0-2c0.666,0,1.333,0,1.999,0C398.902,299.378,398.902,298.711,398.902,298.045z";
+}
+
+.table-view .column-drag-header {
+    -fx-background: -fx-accent;
+    -fx-background-color: -fx-selection-bar;
+    -fx-border-color: transparent;
+    -fx-opacity: 0.6;
+}
+
+.table-view .arrow {
+    -fx-background-color: -fx-mark-highlight-color, -fx-mark-color;
+    -fx-background-insets: 1 0 -1 0, 0;
+    -fx-padding: 0.25em 0.3125em 0.25em 0.3125em;
+    -fx-shape: "M 0 0 h 7 l -3.5 4 z";
+}
+
+/* The main scrollbar CSS class of ListView */
+.table-view .scroll-bar:horizontal,
+.table-view .scroll-bar:vertical {
+    -fx-background-color: transparent;
+
+}
+
+/* The increment and decrement button CSS class of scrollbar */
+.table-view .increment-button, .table-view .decrement-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+/* The main scrollbar **track** CSS class  */
+.table-view .scroll-bar:horizontal .track,
+.table-view .scroll-bar:vertical .track {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-radius: 0em;
+}
+
+/* The main scrollbar **thumb** CSS class which we drag every time (movable) */
+.table-view .scroll-bar:horizontal .thumb,
+.table-view .scroll-bar:vertical .thumb {
+    -fx-background-color: #6ab344;
+    -fx-background-insets: 0, 0, 0;
+    -fx-background-radius: 0em;
+
+}
+
+/* ------------------------------------------------------------------------------------- */
+/** EVENT CSS **/
+/* ------------------------------------------------------------------------------------- */
+
+/* The main scrollbar **track** CSS class on event of "hover" and "pressed" */
+
+.table-view .scroll-bar:horizontal:hover .track,
+.table-view .scroll-bar:horizontal:pressed .track,
+.table-view .scroll-bar:vertical:hover .track,
+.table-view .scroll-bar:vertical:pressed .track {
+    -fx-background-color: derive(gray, 80%);
+    -fx-opacity: 0.2;
+    -fx-background-radius: 0em;
+}
+
+/* The main scrollbar **thumb** CSS class on event of "hover" and "pressed" */
+.table-view .scroll-bar .thumb:hover,
+.table-view .scroll-bar .thumb:pressed {
+    -fx-background-color: #6ab344;
+}
+
+.table-view .increment-button:hover, .table-view .decrement-button:hover {
+    -fx-background-color: #6ab344;
+    -fx-border-color: #3a3a3a;
+}
+
+/* The increment and decrement button CSS class of scrollbar */
+.table-view .scroll-bar:horizontal .increment-button,
+.table-view .scroll-bar:horizontal .decrement-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0em;
+    -fx-padding: 0 0 2 0;
+
+}
+
+/* The increment and decrement button CSS class of scrollbar */
+
+.table-view .scroll-bar:vertical .increment-button,
+.table-view .scroll-bar:vertical .decrement-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0em;
+    -fx-padding: 0 2 0 0;
+
+}
+
+.table-view .scroll-bar .increment-arrow,
+.table-view .scroll-bar .decrement-arrow {
+    -fx-shape: " ";
+    -fx-padding: 0;
+}
+
+/* The main scrollbar **track** CSS class  */
+.table-view .scroll-bar:horizontal .track,
+.table-view .scroll-bar:vertical .track{
+    -fx-background-color:transparent;
+    -fx-border-color:transparent;
+    -fx-background-radius: 0em;
+    -fx-border-radius:2em;
+}
+
+/* The increment and decrement button CSS class of scrollbar */
+.table-view .scroll-bar:horizontal .increment-button ,
+.table-view .scroll-bar:horizontal .decrement-button {
+    -fx-background-color:transparent;
+    -fx-background-radius: 0em;
+    -fx-padding:0 0 10 0;
+
+}
+
+/* The increment and decrement button CSS class of scrollbar */
+
+.table-view .scroll-bar:vertical .increment-button ,
+.table-view .scroll-bar:vertical .decrement-button {
+    -fx-background-color:transparent;
+    -fx-background-radius: 0em;
+    -fx-padding:0 10 0 0;
+
+}
+
+.table-view  .scroll-bar .increment-arrow,
+.table-view  .scroll-bar .decrement-arrow
+{
+    -fx-shape: " ";
+    -fx-padding:0;
+}
+
+/* The main scrollbar **thumb** CSS class which we drag every time (movable) */
+.table-view .scroll-bar:horizontal .thumb,
+.table-view .scroll-bar:vertical .thumb {
+    -fx-background-color:#6c6c6c;
+    -fx-background-insets: 2, 0, 0;
+    -fx-background-radius: 2em;
+
 }

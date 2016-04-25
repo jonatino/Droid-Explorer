@@ -2,6 +2,5 @@
 <project version="4">
   <component name="AntConfiguration">
     <buildFile url="file://$PROJECT_DIR$/../fernflower/build.xml" />
-    <buildFile url="file://$USER_HOME$/Desktop/JFoenix-9efbd97000c9ca53d5d28ef698eafb952822529e/make/build.xml" />
   </component>
 </project>
