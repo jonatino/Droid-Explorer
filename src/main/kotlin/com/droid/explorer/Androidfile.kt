@@ -1,6 +1,5 @@
 package com.droid.explorer
 
-import com.droid.explorer.tracking.PathTracking
 import com.droid.explorer.tracking.PathTracking.currentPath
 import java.text.SimpleDateFormat
 
@@ -14,23 +13,26 @@ data class AndroidFile(var name: String, var date: String, var permissions: Stri
 
 	val absolutePath = (if (!isSymbolicLink()) currentPath else "") + name + "/"
 
+	val type = if (isDirectory()) "directory" else if (isSymbolicLink()) "symlink" else "file"
+
 	companion object {
 		fun parse(input: String): AndroidFile {
-			val fileData = input.split(" ").filterNot { input.isNullOrEmpty() }
+			val fileData: MutableList<String> = input.split(" ").toMutableList()
+			val permissions = fileData.removeAt(0)
 
-			// println(fileData)
-			var name = fileData.last()
-			var date = fileData[fileData.lastIndex - 2] + " " + fileData[fileData.lastIndex - 1]
-			var permissions = fileData.first()
+			val iter = fileData.iterator()
+			while (iter.hasNext() && !iter.next().matches(Regex("([0-9]{4})-([0-9]{2})-([0-9]{2})"))) {
+				iter.remove()
+			}
 
-			if (permissions.startsWith("l"))
-				date = fileData[fileData.lastIndex - 4] + " " + fileData[fileData.lastIndex - 3]
-
-			//TODO breaks if file has space in name -> [-rw-rw-rw-, root, , , , , root, , , , , , , , , , , , 0, 2016-04-24, 01:51, New, file]
-
+			var date = fileData.removeAt(0) + " " + fileData.removeAt(0)
 			val inputFormat = SimpleDateFormat("yyyy-MM-dd HH:mm")
 			val outputFormat = SimpleDateFormat("M/d/yyyy h:mm a")
 			date = outputFormat.format(inputFormat.parse(date))
+
+			var name= ""
+			fileData.forEach { name+=it+" " }
+			name = name.trim()
 
 			return AndroidFile(name, date, permissions)
 		}
