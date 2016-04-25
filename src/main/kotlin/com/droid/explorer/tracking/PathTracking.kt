@@ -1,6 +1,10 @@
 package com.droid.explorer.tracking
 
 import com.droid.explorer.DroidExplorer
+import com.droid.explorer.controller.DirectoryEntry
+import com.droid.explorer.controller.Entry
+import com.droid.explorer.controller.SymbolicLinkEntry
+import java.text.SimpleDateFormat
 import java.util.*
 
 /**
@@ -23,7 +27,7 @@ object PathTracking {
 		} else {
 			droidExplorer.forward.isDisable = true
 		}
-		if (currentIndex > 0&& history.isNotEmpty()) {
+		if (currentIndex > 0 && history.isNotEmpty()) {
 			droidExplorer.back.isDisable = false
 		} else {
 			droidExplorer.back.isDisable = true
@@ -51,7 +55,34 @@ object PathTracking {
 		} else {
 			history.add(path)
 		}
-		currentIndex = history.size-1
+		currentIndex = history.size - 1
+	}
+
+	fun parseEntry(input: String): Entry {
+		val fileData: MutableList<String> = input.split(" ").toMutableList()
+		val permissions = fileData.removeAt(0)
+
+		val iter = fileData.iterator()
+		while (iter.hasNext() && !iter.next().matches(Regex("([0-9]{4})-([0-9]{2})-([0-9]{2})"))) {
+			iter.remove()
+		}
+
+		var date = fileData.removeAt(0) + " " + fileData.removeAt(0)
+		date = SimpleDateFormat("M/d/yyyy h:mm a").format(SimpleDateFormat("yyyy-MM-dd HH:mm").parse(date))
+
+		var name = ""
+		fileData.forEach { name += it + " " }
+		name = name.trim()
+
+		println(name)
+		if (permissions.startsWith("l")) {
+			return SymbolicLinkEntry("", name, date, permissions)
+		} else if (permissions.startsWith("d")) {
+			return DirectoryEntry("", name, date, permissions)
+		} else if (permissions.startsWith("-")) {
+			return DirectoryEntry("",  name, date, permissions)
+		}
+		throw RuntimeException("Unknown file type: $permissions, $date, $name")
 	}
 
 }

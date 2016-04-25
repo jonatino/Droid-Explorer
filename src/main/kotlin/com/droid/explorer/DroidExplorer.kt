@@ -1,9 +1,10 @@
 package com.droid.explorer
 
 import com.droid.explorer.command.shell.impl.ListFiles
+import com.droid.explorer.controller.Entry
+import com.droid.explorer.gui.TextIconCell
 import com.droid.explorer.tracking.PathTracking
 import com.droid.explorer.tracking.PathTracking.currentPath
-import com.droid.explorer.view.FileCell
 import javafx.application.Application
 import javafx.collections.FXCollections
 import javafx.event.EventHandler
@@ -41,11 +42,11 @@ class DroidExplorer : View() {
 
 	override val root: AnchorPane by fxml()
 
-	@FXML lateinit var fileTable: TableView<AndroidFile>
-	@FXML lateinit var name: TableColumn<AndroidFile, String>
-	@FXML lateinit var date: TableColumn<AndroidFile, String>
-	@FXML lateinit var permissions: TableColumn<AndroidFile, String>
-	@FXML lateinit var type: TableColumn<AndroidFile, String>
+	@FXML lateinit var fileTable: TableView<Entry>
+	@FXML lateinit var name: TableColumn<Entry, String>
+	@FXML lateinit var date: TableColumn<Entry, String>
+	@FXML lateinit var permissions: TableColumn<Entry, String>
+	@FXML lateinit var type: TableColumn<Entry, String>
 	@FXML lateinit var filePath: BreadCrumbBar<String>
 	@FXML lateinit var back: Button
 	@FXML lateinit var forward: Button
@@ -81,7 +82,7 @@ class DroidExplorer : View() {
 		back.setOnAction({ event -> PathTracking.back(this) })
 		forward.setOnAction({ event -> PathTracking.forward(this) })
 
-		name.setCellFactory({ column -> FileCell(this) })
+		name.setCellFactory({ column -> TextIconCell(this) })
 
 		fileTable.onMouseClicked = EventHandler<MouseEvent> { mouseEvent ->
 			if (mouseEvent.clickCount === 2) {
@@ -108,11 +109,11 @@ class DroidExplorer : View() {
 		var path = arrayOf("/", *currentPath.split("/").filterNot { it.isNullOrEmpty() }.toTypedArray())
 		filePath.selectedCrumb = BreadCrumbBar.buildTreeModel(*path)
 
-		val list = ArrayList<AndroidFile>()
+		val list = ArrayList<Entry>()
 
 		ListFiles(currentPath, "-l").callback { list.add(it) }
 
-		list.sortBy { it.type }
+		list.sortBy { it.type() }
 
 		fileTable.items = FXCollections.observableArrayList(list)
 
