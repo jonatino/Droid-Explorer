@@ -1,9 +1,14 @@
 package com.droid.explorer.tracking
 
 import com.droid.explorer.DroidExplorer
+import com.droid.explorer.command.shell.impl.ListFiles
 import com.droid.explorer.controller.DirectoryEntry
 import com.droid.explorer.controller.Entry
+import com.droid.explorer.controller.FileEntry
 import com.droid.explorer.controller.SymbolicLinkEntry
+import com.droid.explorer.droidExplorer
+import javafx.collections.FXCollections
+import org.controlsfx.control.BreadCrumbBar
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -12,17 +17,21 @@ import java.util.*
  */
 object PathTracking {
 
-	var currentPath = "/"
+	val root: Entry = DirectoryEntry(null, "/", "", "")
+	var lastPath: Entry? = null
+	var currentPath: Entry = root
+		set(value) {
+			lastPath = field
+			field = value
+			refresh()
+		}
 
 
 	var currentIndex = -1
 	val history = LinkedList<String>()
 
-	val root = Node(null, null, "/")
-	var node = root
-
-	fun check(droidExplorer: DroidExplorer) {
-		if (history.isNotEmpty() && currentIndex + 1 < history.size) {
+	fun check() {
+		/*if (history.isNotEmpty() && currentIndex + 1 < history.size) {
 			droidExplorer.forward.isDisable = false
 		} else {
 			droidExplorer.forward.isDisable = true
@@ -31,31 +40,35 @@ object PathTracking {
 			droidExplorer.back.isDisable = false
 		} else {
 			droidExplorer.back.isDisable = true
-		}
+		}*/
 	}
 
-	fun forward(droidExplorer: DroidExplorer) {
+	fun forward() {
 
 	}
 
-	fun back(droidExplorer: DroidExplorer) {
-		currentIndex--
-		println("Going back to: ${history[currentIndex]}")
-		droidExplorer.navigate(history[currentIndex], false)
+	fun back() {
 	}
 
 	fun add(path: String) {
-		//println("History $history")
-		//println("History $currentIndex")
-		//println("Wanting to add $path")
-		//if (history.isNotEmpty())
-		//println("Last Item ${history.get(currentIndex)} ${currentPath}")
-		if (currentIndex > 0 && history.get(currentIndex) == path) {
+		/*if (currentIndex > 0 && history.get(currentIndex) == path) {
 			println("Dont add it")
 		} else {
 			history.add(path)
 		}
-		currentIndex = history.size - 1
+		currentIndex = history.size - 1*/
+	}
+
+	fun refresh(de: DroidExplorer = droidExplorer) {
+		val path = arrayOf(root, *currentPath.parents.toTypedArray())
+		de.filePath.selectedCrumb = BreadCrumbBar.buildTreeModel(*path)
+
+		val files = ListFiles(currentPath.absolutePath(), "-l").run()
+		files.sortBy { it.type() }
+
+		de.fileTable.items = FXCollections.observableArrayList(files)
+
+		de.path.text = currentPath.absolutePath()
 	}
 
 	fun parseEntry(input: String): Entry {
@@ -74,13 +87,15 @@ object PathTracking {
 		fileData.forEach { name += it + " " }
 		name = name.trim()
 
-		println(name)
 		if (permissions.startsWith("l")) {
-			return SymbolicLinkEntry("", name, date, permissions)
+			val split = name.split(" -> ")
+			name = split.first()
+			val targetPath = split.last()
+			return SymbolicLinkEntry(currentPath, name, date, permissions, targetPath)
 		} else if (permissions.startsWith("d")) {
-			return DirectoryEntry("", name, date, permissions)
+			return DirectoryEntry(currentPath, name, date, permissions)
 		} else if (permissions.startsWith("-")) {
-			return DirectoryEntry("",  name, date, permissions)
+			return FileEntry(currentPath, name, date, permissions)
 		}
 		throw RuntimeException("Unknown file type: $permissions, $date, $name")
 	}

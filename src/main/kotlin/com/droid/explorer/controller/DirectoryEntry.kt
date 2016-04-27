@@ -1,13 +1,9 @@
 package com.droid.explorer.controller
 
-import javafx.scene.image.Image
-
 /**
  * Created by Jonathan on 4/25/2016.
  */
-class DirectoryEntry(parent: String, name: String, date: String, permissions: String) : Entry(parent, name, date, permissions) {
-
-	override val icon by lazy { javafx.scene.image.ImageView(Image(javaClass.getResource("../img/folder.png").toExternalForm())) }
+class DirectoryEntry(parent: Entry?, name: String, date: String, permissions: String) : Entry(parent, name, date, permissions) {
 
 	override fun type() = Type.DIRECTORY
 
