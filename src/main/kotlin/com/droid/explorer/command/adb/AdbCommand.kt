@@ -8,12 +8,17 @@ import java.util.*
  */
 abstract class AdbCommand<T> : Command<T> {
 
-	override fun callback(action: (T) -> Any) = (output() as List<T>).forEach { action(it) }
+	override fun run() = output() as List<T>
 
 	final fun output(): List<String> {
 		println("E:\\Dropbox\\Droid Explorer\\src\\main\\resources\\com\\droid\\explorer\\adb\\adb.exe  "+ Arrays.toString(args))
-		var process = ProcessBuilder("E:\\Dropbox\\Droid Explorer\\src\\main\\resources\\com\\droid\\explorer\\adb\\adb.exe", *args).start()
-		return process.inputStream.reader().readLines().filterNot { it.isNullOrEmpty() }
+		try {
+			before()
+			var process = ProcessBuilder("E:\\Dropbox\\Droid Explorer\\src\\main\\resources\\com\\droid\\explorer\\adb\\adb.exe", *args).start()
+			return process.inputStream.reader().readLines().filterNot { it.isNullOrEmpty() }
+		} finally {
+			after()
+		}
 	}
 
 }

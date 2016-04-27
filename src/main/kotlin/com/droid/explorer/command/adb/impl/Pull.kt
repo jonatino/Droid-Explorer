@@ -7,6 +7,6 @@ import com.droid.explorer.command.adb.AdbCommand
  */
 class Pull(val remoteFile: String, val localFile: String = "") : AdbCommand<String>() {
 
-	override val args = arrayOf("pull", remoteFile, localFile)
+	override val args = arrayOf("pull", "\"$remoteFile\"", "\"$localFile\"")
 
 }

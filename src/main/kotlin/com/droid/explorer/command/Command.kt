@@ -7,6 +7,14 @@ interface Command<T> {
 
 	val args: Array<String>
 
-	fun callback(action: (T) -> Any)
+	fun run(): List<T>
+
+	fun before() {
+
+	}
+
+	fun after() {
+
+	}
 
 }
