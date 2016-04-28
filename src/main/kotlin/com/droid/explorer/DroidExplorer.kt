@@ -21,7 +21,6 @@ import tornadofx.FX
 import tornadofx.FX.Companion.stylesheets
 import tornadofx.View
 import tornadofx.find
-import java.lang.management.ManagementFactory
 import kotlin.properties.Delegates.notNull
 
 /**
@@ -76,8 +75,6 @@ class DroidExplorer : View() {
 	@FXML lateinit var path: Label
 
 	init {
-		println(ManagementFactory.getRuntimeMXBean().name)
-
 		title = "Droid Explorer"
 
 		primaryStage.minHeight = 300.0
@@ -109,6 +106,7 @@ class DroidExplorer : View() {
 		name.setCellFactory({ column -> TextIconCell() })
 
 		fileTable.onMouseClicked = EventHandler<MouseEvent> { mouseEvent ->
+			println(mouseEvent)
 			if (mouseEvent.clickCount % 2 === 0) {
 				val file = fileTable.selectionModel.selectedItem
 					file.navigate()
@@ -118,7 +116,6 @@ class DroidExplorer : View() {
 		filePath.setOnCrumbAction { it.selectedCrumb.value!!.navigate() }
 
 		PathTracking.refresh(this)
-
 	}
 
 }
