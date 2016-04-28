@@ -80,8 +80,6 @@ class DroidExplorer : View() {
 		primaryStage.minHeight = 300.0
 		primaryStage.minWidth = 575.0
 
-		root.style = "-fx-background-color: #3d3d3d;";
-
 		name.cellValueFactory = PropertyValueFactory("name")
 		date.cellValueFactory = PropertyValueFactory("date")
 		permissions.cellValueFactory = PropertyValueFactory("permissions")
