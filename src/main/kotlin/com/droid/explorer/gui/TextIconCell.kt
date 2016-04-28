@@ -21,7 +21,7 @@ import java.util.*
 open class TextIconCell<T, S>() : TableCell<T, S>() {
 
 	companion object {
-		private val cache = HashMap<Int, FileCell>()
+		private val cache = HashMap<Int, CachedFileCell>()
 	}
 
 	override fun updateItem(item: S, empty: Boolean) {
@@ -39,15 +39,14 @@ open class TextIconCell<T, S>() : TableCell<T, S>() {
 						is DirectoryEntry -> {
 							val open = MenuItem("Open", ImageView(Icons.OPEN.image))
 							open.setOnAction({ event -> file.navigate() })
-							rowMenu.items.addAll(open, MenuItem("Compress", ImageView(Icons.COMPRESS.image)), SeparatorMenuItem())
-						}
-						else -> {
-							//TODO download multiple files at once?
-							val download = MenuItem("Download", ImageView(Icons.DOWNLOAD.image))
-							download.setOnAction({ event -> Pull(file.absolutePath, "C:/Users/Jonathan/Desktop").run().forEach { println(it) } })
-							rowMenu.items.add(download)
+							rowMenu.items.addAll(open, /*MenuItem("Compress", ImageView(Icons.COMPRESS.image)),*/ SeparatorMenuItem())
 						}
 					}
+
+					//TODO download multiple files at once?
+					val download = MenuItem("Download", ImageView(Icons.DOWNLOAD.image))
+					download.setOnAction({ event -> Pull(file.absolutePath, "C:/Users/Jonathan/Desktop/${file.name}").run().forEach { println(it) } })
+					rowMenu.items.add(download)
 
 					val replace = MenuItem("Upload", ImageView(Icons.UPLOAD.image))
 					replace.setOnAction({ event ->
@@ -60,9 +59,8 @@ open class TextIconCell<T, S>() : TableCell<T, S>() {
 					})
 
 					val delete = MenuItem("Delete", ImageView(Icons.DELETE.image))
-
 					delete.setOnAction({ event ->
-						val alert = javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.CONFIRMATION);
+						val alert = Alert(javafx.scene.control.Alert.AlertType.CONFIRMATION);
 						alert.title = "Confirm File Deletion";
 						alert.contentText = "Are you sure you want to delete \"$file\"? This action can NOT be reversed.";
 						alert.headerText = null
@@ -80,7 +78,7 @@ open class TextIconCell<T, S>() : TableCell<T, S>() {
 					text = file.name
 					graphic = ImageView(file.type.icon.image)
 					contextMenu = rowMenu
-					cache.put(file.hashCode(), FileCell(text, graphic, contextMenu))
+					cache.put(file.hashCode(), CachedFileCell(text, graphic, contextMenu))
 				} else {
 					text = labeled.text
 					graphic = labeled.graphic
@@ -91,5 +89,5 @@ open class TextIconCell<T, S>() : TableCell<T, S>() {
 	}
 }
 
-class FileCell(val text: String, val graphic: Node, val contextMenu: ContextMenu)
+data class CachedFileCell(val text: String, val graphic: Node, val contextMenu: ContextMenu)
 
