@@ -45,11 +45,11 @@ open class TextIconCell<T, S>() : TableCell<T, S>() {
 
 					//TODO download multiple files at once?
 					val download = MenuItem("Download", ImageView(Icons.DOWNLOAD.image))
-					download.setOnAction({ event -> Pull(file.absolutePath, "C:/Users/Jonathan/Desktop/${file.name}").run().forEach { println(it) } })
+					download.setOnAction({ Pull(file.absolutePath, "C:/Users/Jonathan/Desktop/${file.name}").run().forEach { println(it) } })
 					rowMenu.items.add(download)
 
 					val replace = MenuItem("Upload", ImageView(Icons.UPLOAD.image))
-					replace.setOnAction({ event ->
+					replace.setOnAction({
 						val files = FileChooser().showOpenMultipleDialog(droidExplorer.primaryStage);
 						if (files != null && files.isNotEmpty()) {
 							Mount().run()
@@ -59,7 +59,8 @@ open class TextIconCell<T, S>() : TableCell<T, S>() {
 					})
 
 					val delete = MenuItem("Delete", ImageView(Icons.DELETE.image))
-					delete.setOnAction({ event ->
+
+					delete.setOnAction({
 						val alert = Alert(javafx.scene.control.Alert.AlertType.CONFIRMATION);
 						alert.title = "Confirm File Deletion";
 						alert.contentText = "Are you sure you want to delete \"$file\"? This action can NOT be reversed.";

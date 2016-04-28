@@ -95,19 +95,19 @@ class DroidExplorer : View() {
 		refresh.graphic = Icons.REFRESH
 		home.graphic = Icons.HOME
 
-		refresh.setOnAction({ event -> PathTracking.refresh() })
-		home.setOnAction({ event -> PathTracking.root.navigate() })
+		refresh.setOnAction({ PathTracking.refresh() })
+		home.setOnAction({ PathTracking.root.navigate() })
 
-		back.setOnAction({ event -> PathTracking.back() })
-		forward.setOnAction({ event -> PathTracking.forward() })
+		back.setOnAction({ PathTracking.back() })
+		forward.setOnAction({ PathTracking.forward() })
 
-		name.setCellFactory({ column -> TextIconCell() })
+		name.setCellFactory({ TextIconCell() })
 
 		fileTable.onMouseClicked = EventHandler<MouseEvent> { mouseEvent ->
 			println(mouseEvent)
 			if (mouseEvent.clickCount % 2 === 0) {
 				val file = fileTable.selectionModel.selectedItem
-					file.navigate()
+				file.navigate()
 			}
 		}
 
