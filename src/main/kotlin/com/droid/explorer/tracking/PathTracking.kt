@@ -18,46 +18,12 @@ import java.util.*
 object PathTracking {
 
 	val root: Entry = DirectoryEntry(null, "/", "", "")
-	var lastPath: Entry? = null
+
 	var currentPath: Entry = root
 		set(value) {
-			lastPath = field
 			field = value
 			refresh()
 		}
-
-
-	var currentIndex = -1
-	val history = LinkedList<String>()
-
-	fun check() {
-		/*if (history.isNotEmpty() && currentIndex + 1 < history.size) {
-			droidExplorer.forward.isDisable = false
-		} else {
-			droidExplorer.forward.isDisable = true
-		}
-		if (currentIndex > 0 && history.isNotEmpty()) {
-			droidExplorer.back.isDisable = false
-		} else {
-			droidExplorer.back.isDisable = true
-		}*/
-	}
-
-	fun forward() {
-
-	}
-
-	fun back() {
-	}
-
-	fun add(path: String) {
-		/*if (currentIndex > 0 && history.get(currentIndex) == path) {
-			println("Dont add it")
-		} else {
-			history.add(path)
-		}
-		currentIndex = history.size - 1*/
-	}
 
 	fun refresh(de: DroidExplorer = droidExplorer) {
 		val path = arrayOf(root, *currentPath.parents.toTypedArray())
@@ -69,9 +35,27 @@ object PathTracking {
 		de.fileTable.items = FXCollections.observableArrayList(files)
 
 		de.path.text = currentPath.absolutePath()
+
+		de.back.isDisable = currentPath.parent == null
+		de.forward.isDisable = currentPath.lastChild == null
 	}
 
+	fun forward() {
+		currentPath = currentPath.lastChild!!
+	}
+
+	fun back() {
+		currentPath.parent!!.lastChild = currentPath
+		currentPath = currentPath.parent!!
+	}
+
+	private val cache = HashMap<String, Entry>()
+
 	fun parseEntry(input: String): Entry {
+		val cachedEntry = cache[input]
+		if (cachedEntry != null && cachedEntry.parent == currentPath) {
+			return cachedEntry
+		}
 		val fileData: MutableList<String> = input.split(" ").toMutableList()
 		val permissions = fileData.removeAt(0)
 
@@ -87,17 +71,21 @@ object PathTracking {
 		fileData.forEach { name += it + " " }
 		name = name.trim()
 
+		var entry: Entry
 		if (permissions.startsWith("l")) {
 			val split = name.split(" -> ")
 			name = split.first()
 			val targetPath = split.last()
-			return SymbolicLinkEntry(currentPath, name, date, permissions, targetPath)
+			entry = SymbolicLinkEntry(currentPath, name, date, permissions, targetPath)
 		} else if (permissions.startsWith("d")) {
-			return DirectoryEntry(currentPath, name, date, permissions)
+			entry = DirectoryEntry(currentPath, name, date, permissions)
 		} else if (permissions.startsWith("-")) {
-			return FileEntry(currentPath, name, date, permissions)
+			entry = FileEntry(currentPath, name, date, permissions)
+		} else {
+			throw RuntimeException("Unknown file type: $permissions, $date, $name")
 		}
-		throw RuntimeException("Unknown file type: $permissions, $date, $name")
+		cache.put(input, entry)
+		return entry
 	}
 
 }

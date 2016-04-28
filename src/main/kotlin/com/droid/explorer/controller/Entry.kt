@@ -16,10 +16,12 @@ abstract class Entry(val parent: Entry?, val name: String, val date: String, val
 		var path: String = "/"
 		parents.forEach { path += "$it/" }
 		if (type() == Type.FILE) {
-			path = path.substring(0, path.length-1)
+			path = path.substring(0, path.length - 1)
 		}
 		return path
 	}
+
+	var lastChild: Entry? = null
 
 	fun isRoot() = name == "/"
 	fun isDirectory() = type() == Type.DIRECTORY
@@ -56,7 +58,7 @@ abstract class Entry(val parent: Entry?, val name: String, val date: String, val
 		return true
 	}
 
-	override fun hashCode(): Int{
+	override fun hashCode(): Int {
 		var result = parent?.hashCode() ?: 0
 		result += 31 * result + name.hashCode()
 		result += 31 * result + date.hashCode()
