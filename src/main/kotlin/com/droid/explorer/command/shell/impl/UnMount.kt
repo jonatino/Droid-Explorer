@@ -8,9 +8,7 @@ import com.droid.explorer.tracking.PathTracking
  */
 class UnMount(val system: String = "/") : ShellCommand<String>() {
 
-	override fun after() {
-		PathTracking.refresh()
-	}
+	override fun after() = PathTracking.refresh()
 
 	override val shellArgs = arrayOf("mount", "-o", "remount,ro", system)
 

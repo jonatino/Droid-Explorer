@@ -10,10 +10,7 @@ import com.droid.explorer.controller.Entry
 import com.droid.explorer.droidExplorer
 import com.droid.explorer.tracking.PathTracking
 import javafx.scene.Node
-import javafx.scene.control.ContextMenu
-import javafx.scene.control.MenuItem
-import javafx.scene.control.SeparatorMenuItem
-import javafx.scene.control.TableCell
+import javafx.scene.control.*
 import javafx.scene.image.ImageView
 import javafx.stage.FileChooser
 import java.util.*
@@ -62,7 +59,23 @@ open class TextIconCell<T, S>() : TableCell<T, S>() {
 						}
 					})
 
-					rowMenu.items.addAll(SeparatorMenuItem(), MenuItem("Delete", ImageView(Icons.DELETE.image)), replace)
+					val delete = MenuItem("Delete", ImageView(Icons.DELETE.image))
+
+					delete.setOnAction({ event ->
+						val alert = javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.CONFIRMATION);
+						alert.title = "Confirm File Deletion";
+						alert.contentText = "Are you sure you want to delete \"$file\"? This action can NOT be reversed.";
+						alert.headerText = null
+
+						val result = alert.showAndWait()
+						if (result.isPresent && result.get() == ButtonType.OK) {
+
+						}
+						println(result)
+					})
+
+
+					rowMenu.items.addAll(SeparatorMenuItem(), delete, replace)
 
 					text = file.name
 					graphic = ImageView(file.type().icon.image)

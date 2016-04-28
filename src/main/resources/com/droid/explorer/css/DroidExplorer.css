@@ -57,6 +57,12 @@
     -fx-stroke: -fx-text-fill;
 }
 
+.separator *.line {
+    -fx-border-style: solid;
+    -fx-border-width: 0 1 1 0;
+    -fx-border-color: #494949;
+}
+
 .breadcrumbbar {
     -fx-border-width: 1 1 1 1;
     -fx-border-color: #494949 #494949 #494949 #494949;

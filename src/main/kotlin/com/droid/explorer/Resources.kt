@@ -24,7 +24,7 @@ object Icons {
 	val OPEN by img("img/open.png")
 	val PASTE by img("img/paste.png")
 	val REFRESH by img("img/refresh.png")
-	val UPLOAD by img("img/refresh.png")
+	val UPLOAD by img("img/upload.png")
 
 }
 
