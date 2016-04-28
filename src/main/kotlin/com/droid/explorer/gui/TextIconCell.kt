@@ -44,7 +44,7 @@ open class TextIconCell<T, S>() : TableCell<T, S>() {
 						else -> {
 							//TODO download multiple files at once?
 							val download = MenuItem("Download", ImageView(Icons.DOWNLOAD.image))
-							download.setOnAction({ event -> Pull(file.absolutePath(), "C:/Users/Jonathan/Desktop").run().forEach { println(it) } })
+							download.setOnAction({ event -> Pull(file.absolutePath, "C:/Users/Jonathan/Desktop").run().forEach { println(it) } })
 							rowMenu.items.add(download)
 						}
 					}
@@ -54,7 +54,7 @@ open class TextIconCell<T, S>() : TableCell<T, S>() {
 						val files = FileChooser().showOpenMultipleDialog(droidExplorer.primaryStage);
 						if (files != null && files.isNotEmpty()) {
 							Mount().run()
-							files.forEach { Push(it.absolutePath, PathTracking.currentPath.absolutePath()).run().forEach { println(it) } }
+							files.forEach { Push(it.absolutePath, PathTracking.currentPath.absolutePath).run().forEach { println(it) } }
 							UnMount().run()
 						}
 					})
@@ -78,7 +78,7 @@ open class TextIconCell<T, S>() : TableCell<T, S>() {
 					rowMenu.items.addAll(SeparatorMenuItem(), delete, replace)
 
 					text = file.name
-					graphic = ImageView(file.type().icon.image)
+					graphic = ImageView(file.type.icon.image)
 					contextMenu = rowMenu
 					cache.put(file.hashCode(), FileCell(text, graphic, contextMenu))
 				} else {

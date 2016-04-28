@@ -29,12 +29,12 @@ object PathTracking {
 		val path = arrayOf(root, *currentPath.parents.toTypedArray())
 		de.filePath.selectedCrumb = BreadCrumbBar.buildTreeModel(*path)
 
-		val files = ListFiles(currentPath.absolutePath(), "-l").run()
-		files.sortBy { it.type() }
+		val files = ListFiles(currentPath.absolutePath, "-l").run()
+		files.sortBy { it.type }
 
 		de.fileTable.items = FXCollections.observableArrayList(files)
 
-		de.path.text = currentPath.absolutePath()
+		de.path.text = currentPath.absolutePath
 
 		de.back.isDisable = currentPath.parent == null
 		de.forward.isDisable = currentPath.lastChild == null

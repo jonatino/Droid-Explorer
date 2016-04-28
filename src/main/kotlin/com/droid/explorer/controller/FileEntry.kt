@@ -5,6 +5,6 @@ package com.droid.explorer.controller
  */
 class FileEntry(parent: Entry?, name: String, date: String, permissions: String) : Entry(parent, name, date, permissions) {
 
-	override fun type() = Type.FILE
+	override val type = Type.FILE
 
 }

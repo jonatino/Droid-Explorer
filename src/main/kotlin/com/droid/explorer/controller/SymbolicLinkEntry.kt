@@ -5,6 +5,6 @@ package com.droid.explorer.controller
  */
 class SymbolicLinkEntry(parent: Entry?, name: String, date: String, permissions: String, val targetPath: String) : Entry(parent, name, date, permissions) {
 
-	override fun type() = Type.SYMLINK
+	override val type = Type.SYMLINK
 
 }

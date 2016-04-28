@@ -10,25 +10,26 @@ import java.util.*
  */
 abstract class Entry(val parent: Entry?, val name: String, val date: String, val permissions: String) {
 
-	abstract fun type(): Type
+	abstract val type: Type
 
-	fun absolutePath(): String {
-		var path: String = "/"
-		parents.forEach { path += "$it/" }
-		if (type() == Type.FILE) {
-			path = path.substring(0, path.length - 1)
-		}
-		return path
+	fun isRoot() = name == "/"
+	fun isDirectory() = type === Type.DIRECTORY
+	fun isSymbolicLink() = type === Type.SYMLINK
+
+	fun navigate() {
+		if (isDirectory())
+			PathTracking.currentPath = this
 	}
 
 	var lastChild: Entry? = null
 
-	fun isRoot() = name == "/"
-	fun isDirectory() = type() == Type.DIRECTORY
-	fun isSymbolicLink() = type() == Type.SYMLINK
-
-	fun navigate() {
-		PathTracking.currentPath = this
+	val absolutePath: String by lazy {
+		var path: String = "/"
+		parents.forEach { path += "$it/" }
+		if (type === Type.FILE) {
+			path = path.substring(0, path.length - 1)
+		}
+		path
 	}
 
 	val parents: List<Entry?> by lazy {
@@ -54,7 +55,7 @@ abstract class Entry(val parent: Entry?, val name: String, val date: String, val
 		if (name != other.name) return false
 		if (date != other.date) return false
 		if (permissions != other.permissions) return false
-		if (absolutePath() != other.absolutePath()) return false
+		if (absolutePath != other.absolutePath) return false
 		return true
 	}
 

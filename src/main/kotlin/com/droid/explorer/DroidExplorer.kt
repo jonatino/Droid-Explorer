@@ -109,11 +109,9 @@ class DroidExplorer : View() {
 		name.setCellFactory({ column -> TextIconCell() })
 
 		fileTable.onMouseClicked = EventHandler<MouseEvent> { mouseEvent ->
-			if (mouseEvent.clickCount === 2) {
+			if (mouseEvent.clickCount % 2 === 0) {
 				val file = fileTable.selectionModel.selectedItem
-				if (file != null && file.isDirectory()) {
 					file.navigate()
-				}
 			}
 		}
 
