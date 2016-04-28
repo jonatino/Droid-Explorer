@@ -33,19 +33,19 @@ abstract class Entry(val parent: Entry?, val name: String, val date: String, val
 	}
 
 	val parents: List<Entry?> by lazy {
-		val entires = ArrayList<Entry?>()
+		val entries = ArrayList<Entry?>()
 		if (!isRoot())
-			entires.add(this)
+			entries.add(this)
 
 		var currentEntry: Entry? = this
 		while (currentEntry?.parent != null) {
 			val parent = currentEntry!!.parent;
 			if (!parent!!.isRoot()) {
-				entires.add(parent)
+				entries.add(parent)
 			}
 			currentEntry = parent
 		}
-		entires.reversed()
+		entries.reversed()
 	}
 
 	override fun equals(other: Any?): Boolean {
