@@ -26,10 +26,7 @@
     <orderEntry type="library" name="Maven: org.jetbrains.kotlin:kotlin-runtime:1.0.1-2" level="project" />
     <orderEntry type="library" name="Maven: no.tornado:tornadofx:1.4.2" level="project" />
     <orderEntry type="library" name="Maven: org.glassfish:javax.json:1.0.4" level="project" />
-    <orderEntry type="library" name="Maven: no.tornado:tornadofx-controls:1.0.3" level="project" />
-    <orderEntry type="library" name="Maven: de.jensd:fontawesomefx:8.9" level="project" />
     <orderEntry type="library" name="Maven: org.controlsfx:controlsfx:8.40.10" level="project" />
-    <orderEntry type="library" name="Maven: no.tornado:fxlauncher:1.0.8" level="project" />
   </component>
   <component name="org.twodividedbyzero.idea.findbugs">
     <option name="_basePreferences">
