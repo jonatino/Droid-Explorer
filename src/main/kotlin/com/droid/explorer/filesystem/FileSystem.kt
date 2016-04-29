@@ -1,12 +1,12 @@
-package com.droid.explorer.tracking
+package com.droid.explorer.filesystem
 
 import com.droid.explorer.DroidExplorer
 import com.droid.explorer.command.shell.impl.ListFiles
-import com.droid.explorer.controller.DirectoryEntry
-import com.droid.explorer.controller.Entry
-import com.droid.explorer.controller.FileEntry
-import com.droid.explorer.controller.SymbolicLinkEntry
 import com.droid.explorer.droidExplorer
+import com.droid.explorer.filesystem.entry.DirectoryEntry
+import com.droid.explorer.filesystem.entry.Entry
+import com.droid.explorer.filesystem.entry.FileEntry
+import com.droid.explorer.filesystem.entry.SymbolicLinkEntry
 import javafx.collections.FXCollections
 import org.controlsfx.control.BreadCrumbBar
 import java.text.SimpleDateFormat
@@ -15,7 +15,7 @@ import java.util.*
 /**
  * Created by Jonathan on 4/23/2016.
  */
-object PathTracking {
+object FileSystem {
 
 	val root: Entry = DirectoryEntry(null, "/", "", "")
 
@@ -33,8 +33,6 @@ object PathTracking {
 		files.sortBy { it.type }
 
 		de.fileTable.items = FXCollections.observableArrayList(files)
-
-		de.path.text = currentPath.absolutePath
 
 		de.back.isDisable = currentPath.parent == null
 		de.forward.isDisable = currentPath.lastChild == null
@@ -79,11 +77,10 @@ object PathTracking {
 			entry = SymbolicLinkEntry(currentPath, name, date, permissions, targetPath)
 		} else if (permissions.startsWith("d")) {
 			entry = DirectoryEntry(currentPath, name, date, permissions)
-		} else if (permissions.startsWith("-")) {
+		} else  {
 			entry = FileEntry(currentPath, name, date, permissions)
-		} else {
-			throw RuntimeException("Unknown file type: $permissions, $date, $name")
 		}
+
 		cache.put(input, entry)
 		return entry
 	}

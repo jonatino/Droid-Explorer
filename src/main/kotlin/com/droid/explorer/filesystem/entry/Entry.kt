@@ -1,7 +1,7 @@
-package com.droid.explorer.controller
+package com.droid.explorer.filesystem.entry
 
-import com.droid.explorer.Icons
-import com.droid.explorer.tracking.PathTracking
+import com.droid.explorer.gui.Icons
+import com.droid.explorer.filesystem.FileSystem
 import javafx.scene.image.ImageView
 import java.util.*
 
@@ -18,7 +18,7 @@ abstract class Entry(val parent: Entry?, val name: String, val date: String, val
 
 	fun navigate() {
 		if (isDirectory())
-			PathTracking.currentPath = this
+			FileSystem.currentPath = this
 	}
 
 	var lastChild: Entry? = null

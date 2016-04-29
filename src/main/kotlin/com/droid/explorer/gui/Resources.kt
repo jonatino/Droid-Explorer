@@ -1,5 +1,6 @@
-package com.droid.explorer
+package com.droid.explorer.gui
 
+import com.droid.explorer.DroidExplorer
 import javafx.scene.image.Image
 import javafx.scene.image.ImageView
 import kotlin.reflect.KProperty
@@ -30,12 +31,12 @@ object Icons {
 
 object Css {
 
-	val MAIN by lazy { javaClass.getResource("css/DroidExplorer.css").toExternalForm() }
+	val MAIN by lazy { DroidExplorer::class.java.getResource("css/DroidExplorer.css").toExternalForm() }
 
 }
 
 class img(val file: String) {
-	private var imageView = ImageView(Image(javaClass.getResource(file).toExternalForm()))
+	private var imageView = ImageView(Image(DroidExplorer::class.java.getResource(file).toExternalForm()))
 	operator fun getValue(thisRef: Any?, property: KProperty<*>) = imageView
 
 }

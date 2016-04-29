@@ -1,4 +1,4 @@
-package com.droid.explorer.controller
+package com.droid.explorer.filesystem.entry
 
 /**
  * Created by Jonathan on 4/25/2016.

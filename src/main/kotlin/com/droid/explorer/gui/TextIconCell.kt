@@ -1,14 +1,14 @@
 package com.droid.explorer.gui
 
-import com.droid.explorer.Icons
+import com.droid.explorer.gui.Icons
 import com.droid.explorer.command.adb.impl.Push
 import com.droid.explorer.command.shell.impl.Mount
 import com.droid.explorer.command.shell.impl.Pull
 import com.droid.explorer.command.shell.impl.UnMount
-import com.droid.explorer.controller.DirectoryEntry
-import com.droid.explorer.controller.Entry
+import com.droid.explorer.filesystem.entry.DirectoryEntry
+import com.droid.explorer.filesystem.entry.Entry
 import com.droid.explorer.droidExplorer
-import com.droid.explorer.tracking.PathTracking
+import com.droid.explorer.filesystem.FileSystem
 import javafx.scene.Node
 import javafx.scene.control.*
 import javafx.scene.image.ImageView
@@ -53,7 +53,7 @@ open class TextIconCell<T, S>() : TableCell<T, S>() {
 						val files = FileChooser().showOpenMultipleDialog(droidExplorer.primaryStage);
 						if (files != null && files.isNotEmpty()) {
 							Mount().run()
-							files.forEach { Push(it.absolutePath, PathTracking.currentPath.absolutePath).run().forEach { println(it) } }
+							files.forEach { Push(it.absolutePath, FileSystem.currentPath.absolutePath).run().forEach { println(it) } }
 							UnMount().run()
 						}
 					})

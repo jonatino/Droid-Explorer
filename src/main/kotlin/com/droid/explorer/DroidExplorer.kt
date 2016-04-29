@@ -1,8 +1,10 @@
 package com.droid.explorer
 
-import com.droid.explorer.controller.Entry
+import com.droid.explorer.filesystem.FileSystem
+import com.droid.explorer.filesystem.entry.Entry
+import com.droid.explorer.gui.Css
+import com.droid.explorer.gui.Icons
 import com.droid.explorer.gui.TextIconCell
-import com.droid.explorer.tracking.PathTracking
 import javafx.application.Application
 import javafx.event.EventHandler
 import javafx.fxml.FXML
@@ -72,7 +74,6 @@ class DroidExplorer : View() {
 	@FXML lateinit var forward: Button
 	@FXML lateinit var refresh: Button
 	@FXML lateinit var home: Button
-	@FXML lateinit var path: Label
 
 	init {
 		title = "Droid Explorer"
@@ -95,11 +96,11 @@ class DroidExplorer : View() {
 		refresh.graphic = Icons.REFRESH
 		home.graphic = Icons.HOME
 
-		refresh.setOnAction({ PathTracking.refresh() })
-		home.setOnAction({ PathTracking.root.navigate() })
+		refresh.setOnAction({ FileSystem.refresh() })
+		home.setOnAction({ FileSystem.root.navigate() })
 
-		back.setOnAction({ PathTracking.back() })
-		forward.setOnAction({ PathTracking.forward() })
+		back.setOnAction({ FileSystem.back() })
+		forward.setOnAction({ FileSystem.forward() })
 
 		name.setCellFactory({ TextIconCell() })
 
@@ -113,7 +114,7 @@ class DroidExplorer : View() {
 
 		filePath.setOnCrumbAction { it.selectedCrumb.value!!.navigate() }
 
-		PathTracking.refresh(this)
+		FileSystem.refresh(this)
 	}
 
 }
