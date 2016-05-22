@@ -7,6 +7,6 @@ import com.droid.explorer.command.shell.ShellCommand
  */
 class Remove(val target: String) : ShellCommand<String>() {
 
-	override val shellArgs = arrayOf("rm", "-rf", target)
+	override val shellArgs = arrayOf("rm", "-rf", "$target")
 
 }

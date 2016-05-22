@@ -1,14 +1,14 @@
 package com.droid.explorer.gui
 
-import com.droid.explorer.gui.Icons
 import com.droid.explorer.command.adb.impl.Push
 import com.droid.explorer.command.shell.impl.Mount
 import com.droid.explorer.command.shell.impl.Pull
+import com.droid.explorer.command.shell.impl.Remove
 import com.droid.explorer.command.shell.impl.UnMount
-import com.droid.explorer.filesystem.entry.DirectoryEntry
-import com.droid.explorer.filesystem.entry.Entry
 import com.droid.explorer.droidExplorer
 import com.droid.explorer.filesystem.FileSystem
+import com.droid.explorer.filesystem.entry.DirectoryEntry
+import com.droid.explorer.filesystem.entry.Entry
 import javafx.scene.Node
 import javafx.scene.control.*
 import javafx.scene.image.ImageView
@@ -43,10 +43,26 @@ open class TextIconCell<T, S>() : TableCell<T, S>() {
 						}
 					}
 
-					//TODO download multiple files at once?
 					val download = MenuItem("Download", ImageView(Icons.DOWNLOAD.image))
-					download.setOnAction({ Pull(file.absolutePath, "C:/Users/Jonathan/Desktop/${file.name}").run().forEach { println(it) } })
-					rowMenu.items.add(download)
+					download.setOnAction({
+						tableView.selectionModel.selectedItems.forEach {
+							val selectedfile = it as Entry
+							Pull(selectedfile.absolutePath, "C:/Users/Jonathan/Desktop/${selectedfile.name}").run().forEach {
+								println(it)
+							}
+						}
+					}
+					)
+
+					val move = Menu("Move")
+					val cut = MenuItem("Cut", ImageView(Icons.CUT.image))
+					val copy = MenuItem("Copy", ImageView(Icons.COPY.image))
+					val paste = MenuItem("Paste", ImageView(Icons.PASTE.image))
+					paste.isDisable = true
+
+					move.items.addAll(cut, copy, paste)
+
+					rowMenu.items.addAll(move, download)
 
 					val replace = MenuItem("Upload", ImageView(Icons.UPLOAD.image))
 					replace.setOnAction({
@@ -68,9 +84,10 @@ open class TextIconCell<T, S>() : TableCell<T, S>() {
 
 						val result = alert.showAndWait()
 						if (result.isPresent && result.get() == ButtonType.OK) {
-
+							Mount().run()
+							Remove(file.absolutePath).run()
+							UnMount().run()
 						}
-						println(result)
 					})
 
 

@@ -9,10 +9,7 @@ import javafx.application.Application
 import javafx.event.EventHandler
 import javafx.fxml.FXML
 import javafx.scene.Scene
-import javafx.scene.control.Button
-import javafx.scene.control.Label
-import javafx.scene.control.TableColumn
-import javafx.scene.control.TableView
+import javafx.scene.control.*
 import javafx.scene.control.cell.PropertyValueFactory
 import javafx.scene.input.MouseEvent
 import javafx.scene.layout.AnchorPane
@@ -111,6 +108,8 @@ class DroidExplorer : View() {
 				file.navigate()
 			}
 		}
+
+		fileTable.selectionModel.selectionMode = SelectionMode.MULTIPLE
 
 		filePath.setOnCrumbAction { it.selectedCrumb.value!!.navigate() }
 
