@@ -1,6 +1,5 @@
 package com.droid.explorer.filesystem
 
-import com.droid.explorer.DroidExplorer
 import com.droid.explorer.command.shell.impl.ListFiles
 import com.droid.explorer.droidExplorer
 import com.droid.explorer.filesystem.entry.DirectoryEntry
@@ -25,17 +24,17 @@ object FileSystem {
 			refresh()
 		}
 
-	fun refresh(de: DroidExplorer = droidExplorer) {
+	fun refresh() {
 		val path = arrayOf(root, *currentPath.parents.toTypedArray())
-		de.filePath.selectedCrumb = BreadCrumbBar.buildTreeModel(*path)
+		droidExplorer.filePath.selectedCrumb = BreadCrumbBar.buildTreeModel(*path)
 
 		val files = ListFiles(currentPath.absolutePath, "-l").run()
 		files.sortBy { it.type }
 
-		de.fileTable.items = FXCollections.observableArrayList(files)
+		droidExplorer.fileTable.items = FXCollections.observableArrayList(files)
 
-		de.back.isDisable = currentPath.parent == null
-		de.forward.isDisable = currentPath.lastChild == null
+		droidExplorer.back.isDisable = currentPath.parent == null
+		droidExplorer.forward.isDisable = currentPath.lastChild == null
 	}
 
 	fun forward() {
@@ -69,7 +68,7 @@ object FileSystem {
 		fileData.forEach { name += it + " " }
 		name = name.trim()
 
-		var entry: Entry
+		val entry: Entry
 		if (permissions.startsWith("l")) {
 			val split = name.split(" -> ")
 			name = split.first()

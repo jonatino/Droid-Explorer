@@ -1,10 +1,15 @@
 package com.droid.explorer
 
+import com.droid.explorer.command.adb.impl.DeviceSerial
+import com.droid.explorer.command.adb.impl.DeviceState
 import com.droid.explorer.filesystem.FileSystem
 import com.droid.explorer.filesystem.entry.Entry
 import com.droid.explorer.gui.Css
 import com.droid.explorer.gui.Icons
 import com.droid.explorer.gui.TextIconCell
+import javafx.animation.Animation
+import javafx.animation.KeyFrame
+import javafx.animation.Timeline
 import javafx.application.Application
 import javafx.event.EventHandler
 import javafx.fxml.FXML
@@ -14,6 +19,7 @@ import javafx.scene.control.cell.PropertyValueFactory
 import javafx.scene.input.MouseEvent
 import javafx.scene.layout.AnchorPane
 import javafx.stage.Stage
+import javafx.util.Duration
 import org.controlsfx.control.BreadCrumbBar
 import tornadofx.App
 import tornadofx.FX
@@ -71,6 +77,7 @@ class DroidExplorer : View() {
 	@FXML lateinit var forward: Button
 	@FXML lateinit var refresh: Button
 	@FXML lateinit var home: Button
+	@FXML lateinit var status: Label
 
 	init {
 		title = "Droid Explorer"
@@ -113,7 +120,21 @@ class DroidExplorer : View() {
 
 		filePath.setOnCrumbAction { it.selectedCrumb.value!!.navigate() }
 
-		FileSystem.refresh(this)
+		val timeline = Timeline(KeyFrame(Duration.ZERO, EventHandler {
+			DeviceState().run().forEach {
+				if (it == "unknown") {
+					status.text = "Disconnected"
+					fileTable.items.clear()
+				} else if (it == "device" && !status.text.startsWith("C")) {
+					DeviceSerial().run().forEach {
+						status.text = "Connected: $it"
+						FileSystem.refresh()
+					}
+				}
+			}
+		}), KeyFrame(Duration.millis(250.0)))
+		timeline.cycleCount = Animation.INDEFINITE
+		timeline.play()
 	}
 
 }
