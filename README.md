@@ -1,7 +1,7 @@
 # DroidExplore
 
 # Summary
-DroidExplore is an open source Kotlin library that provides file access to Android phones via ADB on Linux/Windows/MacOS X.
+DroidExplore is an open source Kotlin library that provides file access to Android phones via ADB on Linux/Windows/MacOS X with NO need for extra libraries/apps!
 
 **NOTE** : DroidExplore requires **Java 1.8 u60** and above.
 
