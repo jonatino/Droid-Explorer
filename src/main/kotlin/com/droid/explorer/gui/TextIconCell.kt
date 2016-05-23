@@ -47,7 +47,7 @@ open class TextIconCell<T, S>() : TableCell<T, S>() {
 					download.setOnAction({
 						tableView.selectionModel.selectedItems.forEach {
 							val selectedfile = it as Entry
-							Pull(selectedfile.absolutePath, "C:/Users/Jonathan/Desktop/${selectedfile.name}").run().forEach {
+							Pull(selectedfile.absolutePath, "C:/Users/Jonathan/Desktop/${selectedfile.name}").run() {
 								println(it)
 							}
 						}
@@ -69,7 +69,7 @@ open class TextIconCell<T, S>() : TableCell<T, S>() {
 						val files = FileChooser().showOpenMultipleDialog(droidExplorer.primaryStage);
 						if (files != null && files.isNotEmpty()) {
 							Mount().run()
-							files.forEach { Push(it.absolutePath, FileSystem.currentPath.absolutePath).run().forEach { println(it) } }
+							files.forEach { Push(it.absolutePath, FileSystem.currentPath.absolutePath).run() { println(it) } }
 							UnMount().run()
 						}
 					})

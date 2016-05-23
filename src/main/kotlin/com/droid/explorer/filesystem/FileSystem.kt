@@ -28,7 +28,8 @@ object FileSystem {
 		val path = arrayOf(root, *currentPath.parents.toTypedArray())
 		droidExplorer.filePath.selectedCrumb = BreadCrumbBar.buildTreeModel(*path)
 
-		val files = ListFiles(currentPath.absolutePath, "-l").run()
+		val files = mutableListOf<Entry>()
+		ListFiles(currentPath.absolutePath, "-l").run() { files.add(parseEntry(it)) }
 		files.sortBy { it.type }
 
 		droidExplorer.fileTable.items = FXCollections.observableArrayList(files)
@@ -76,7 +77,7 @@ object FileSystem {
 			entry = SymbolicLinkEntry(currentPath, name, date, permissions, targetPath)
 		} else if (permissions.startsWith("d")) {
 			entry = DirectoryEntry(currentPath, name, date, permissions)
-		} else  {
+		} else {
 			entry = FileEntry(currentPath, name, date, permissions)
 		}
 

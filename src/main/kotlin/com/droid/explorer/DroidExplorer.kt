@@ -2,6 +2,7 @@ package com.droid.explorer
 
 import com.droid.explorer.command.adb.impl.DeviceSerial
 import com.droid.explorer.command.adb.impl.DeviceState
+import com.droid.explorer.command.shell.impl.Start
 import com.droid.explorer.filesystem.FileSystem
 import com.droid.explorer.filesystem.entry.Entry
 import com.droid.explorer.gui.Css
@@ -26,6 +27,7 @@ import tornadofx.FX
 import tornadofx.FX.Companion.stylesheets
 import tornadofx.View
 import tornadofx.find
+import kotlin.concurrent.thread
 import kotlin.properties.Delegates.notNull
 
 /**
@@ -80,6 +82,8 @@ class DroidExplorer : View() {
 	@FXML lateinit var status: Label
 
 	init {
+		Start().run()
+
 		title = "Droid Explorer"
 
 		primaryStage.minHeight = 300.0
@@ -120,21 +124,24 @@ class DroidExplorer : View() {
 
 		filePath.setOnCrumbAction { it.selectedCrumb.value!!.navigate() }
 
-		val timeline = Timeline(KeyFrame(Duration.ZERO, EventHandler {
-			DeviceState().run().forEach {
-				if (it == "unknown") {
-					status.text = "Disconnected"
-					fileTable.items.clear()
-				} else if (it == "device" && !status.text.startsWith("C")) {
-					DeviceSerial().run().forEach {
-						status.text = "Connected: $it"
-						FileSystem.refresh()
+		thread {
+			val timeline = Timeline(KeyFrame(Duration.ZERO, EventHandler {
+				DeviceState().run() {
+					if (it == "unknown") {
+						status.text = "Disconnected"
+						fileTable.items.clear()
+					} else if (it == "device" && !status.text.startsWith("C")) {
+						DeviceSerial().run() {
+							status.text = "Connected: $it"
+							FileSystem.refresh()
+						}
 					}
 				}
-			}
-		}), KeyFrame(Duration.millis(250.0)))
-		timeline.cycleCount = Animation.INDEFINITE
-		timeline.play()
+			}), KeyFrame(Duration.millis(250.0)))
+			timeline.cycleCount = Animation.INDEFINITE
+			timeline.play()
+		}
+
 	}
 
 }
