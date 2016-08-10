@@ -69,6 +69,8 @@ class DroidExplorer : View() {
 
 	override val root: AnchorPane by fxml()
 
+    var connected: Boolean = false
+
 	@FXML lateinit var fileTable: TableView<Entry>
 	@FXML lateinit var name: TableColumn<Entry, String>
 	@FXML lateinit var date: TableColumn<Entry, String>
@@ -116,7 +118,7 @@ class DroidExplorer : View() {
 			println(mouseEvent)
 			if (mouseEvent.clickCount % 2 === 0) {
 				val file = fileTable.selectionModel.selectedItem
-				file.navigate()
+                file?.navigate()
 			}
 		}
 
@@ -128,12 +130,10 @@ class DroidExplorer : View() {
 			val timeline = Timeline(KeyFrame(Duration.ZERO, EventHandler {
 				DeviceState().run() {
 					if (it == "unknown") {
-						status.text = "Disconnected"
-						fileTable.items.clear()
-					} else if (it == "device" && !status.text.startsWith("C")) {
+                        connected(false)
+                    } else if (!connected && it == "device") {
 						DeviceSerial().run() {
-							status.text = "Connected: $it"
-							FileSystem.refresh()
+                            connected(true)
 						}
 					}
 				}
@@ -141,8 +141,18 @@ class DroidExplorer : View() {
 			timeline.cycleCount = Animation.INDEFINITE
 			timeline.play()
 		}
+    }
 
+    fun connected(b: Boolean) {
+        connected = b
+
+        refresh.isDisable = !connected
+        if (!connected) fileTable.items.clear()
+        status.text = if (connected) "Connected" else "Disconnected"
+        FileSystem.refresh()
 	}
+
+    fun withSelected(block: (Entry) -> Unit) = fileTable.selectionModel.selectedItems.forEach { block(it) }
 
 }
 
