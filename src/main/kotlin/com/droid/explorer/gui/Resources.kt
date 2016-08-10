@@ -36,7 +36,9 @@ object Css {
 }
 
 class img(val file: String) {
-	private var imageView = ImageView(Image(DroidExplorer::class.java.getResource(file).toExternalForm()))
+
+    private val imageView by lazy { ImageView(Image(DroidExplorer::class.java.getResource(file).toExternalForm())) }
+
 	operator fun getValue(thisRef: Any?, property: KProperty<*>) = imageView
 
 }
