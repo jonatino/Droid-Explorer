@@ -10,6 +10,6 @@ class UnMount(system: String = "/") : ShellCommand() {
 
 	override fun after() = FileSystem.refresh()
 
-	override val shellArgs = arrayOf("mount", "-o", "remount,ro", system)
+    override val shellArgs = arrayOf("mount", "-o", "remount,ro", "\"$system\"")
 
 }

@@ -7,6 +7,6 @@ import com.droid.explorer.command.shell.ShellCommand
  */
 class Mount(system: String = "/") : ShellCommand() {
 
-	override val shellArgs = arrayOf("mount", "-o", "remount,rw", system)
+    override val shellArgs = arrayOf("mount", "-o", "remount,rw", "\"$system\"")
 
 }
