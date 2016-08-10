@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Droid Explorer.iml" filepath="$PROJECT_DIR$/Droid Explorer.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../Gmail Account Creator/Gmail Account Creator.iml" filepath="$PROJECT_DIR$/../Gmail Account Creator/Gmail Account Creator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Droid-Explorer.iml" filepath="$PROJECT_DIR$/Droid-Explorer.iml" />
     </modules>
   </component>
 </project>
