@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!--
+  ~    Copyright 2016 Jonathan Beaudoin
+  ~
+  ~    Licensed under the Apache License, Version 2.0 (the "License");
+  ~    you may not use this file except in compliance with the License.
+  ~    You may obtain a copy of the License at
+  ~
+  ~        http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~    Unless required by applicable law or agreed to in writing, software
+  ~    distributed under the License is distributed on an "AS IS" BASIS,
+  ~    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~    See the License for the specific language governing permissions and
+  ~    limitations under the License.
+  -->
+
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -7,23 +23,30 @@
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="375"
             minWidth="550" prefHeight="546.0" prefWidth="746.0" style="-fx-background-color: #3d3d3d"
             xmlns="http://javafx.com/javafx/8.0.65">
-        <Button fx:id="back" layoutX="5.0" layoutY="5.0" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="5.0" />
-        <Button fx:id="refresh" layoutX="75.0" layoutY="5.0" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" AnchorPane.topAnchor="5.0" />
-        <Button fx:id="home" layoutX="110.0" layoutY="5.0" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" AnchorPane.topAnchor="5.0" />
-        <Button fx:id="forward" layoutX="40.0" layoutY="5.0" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" AnchorPane.topAnchor="5.0" />
-        <BreadCrumbBar fx:id="filePath" layoutX="148.0" layoutY="5.0" maxHeight="31.0" prefHeight="31.0" prefWidth="594.0" styleClass="breadcrumbbar" AnchorPane.leftAnchor="147.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0" />
+    <Button fx:id="back" layoutX="5.0" layoutY="5.0" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0"
+            mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" AnchorPane.leftAnchor="0.0"
+            AnchorPane.topAnchor="5.0"/>
+    <Button fx:id="refresh" layoutX="75.0" layoutY="5.0" maxHeight="30.0" maxWidth="30.0" minHeight="30.0"
+            minWidth="30.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" AnchorPane.topAnchor="5.0"/>
+    <Button fx:id="home" layoutX="110.0" layoutY="5.0" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0"
+            mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" AnchorPane.topAnchor="5.0"/>
+    <Button fx:id="forward" layoutX="40.0" layoutY="5.0" maxHeight="30.0" maxWidth="30.0" minHeight="30.0"
+            minWidth="30.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" AnchorPane.topAnchor="5.0"/>
+    <BreadCrumbBar fx:id="filePath" layoutX="148.0" layoutY="5.0" maxHeight="31.0" prefHeight="31.0" prefWidth="594.0"
+                   styleClass="breadcrumbbar" AnchorPane.leftAnchor="147.0" AnchorPane.rightAnchor="0.0"
+                   AnchorPane.topAnchor="5.0"/>
     <TableView fx:id="fileTable" layoutY="43.0" prefHeight="463.0" prefWidth="746.0" AnchorPane.bottomAnchor="20.0"
                AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="43.0">
-            <columns>
-                <TableColumn fx:id="name" prefWidth="250.0" text="Name" />
-                <TableColumn fx:id="date" maxWidth="125.0" minWidth="125.0" prefWidth="125.0" text="Date" />
-                <TableColumn fx:id="permissions" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" text="Permissions" />
-                <TableColumn fx:id="type" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Type" />
-            </columns>
-        </TableView>
+        <columns>
+            <TableColumn fx:id="name" prefWidth="250.0" text="Name"/>
+            <TableColumn fx:id="date" maxWidth="125.0" minWidth="125.0" prefWidth="125.0" text="Date"/>
+            <TableColumn fx:id="permissions" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" text="Permissions"/>
+            <TableColumn fx:id="type" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Type"/>
+        </columns>
+    </TableView>
     <Label fx:id="status" text="Disconnected" layoutY="530.0" prefHeight="17.0" prefWidth="736.0" textFill="WHITE"
            AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"/>
     <padding>
-        <Insets bottom="5.0" left="5.0" right="5.0" />
+        <Insets bottom="5.0" left="5.0" right="5.0"/>
     </padding>
 </AnchorPane>
