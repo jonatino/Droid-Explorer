@@ -6,7 +6,7 @@ import com.droid.explorer.filesystem.FileSystem
 /**
  * Created by Jonathan on 4/23/2016.
  */
-class UnMount(val system: String = "/") : ShellCommand() {
+class UnMount(system: String = "/") : ShellCommand() {
 
 	override fun after() = FileSystem.refresh()
 
