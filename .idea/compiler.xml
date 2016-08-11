@@ -22,11 +22,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
-        <module name="Droid-Explorer" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="Droid-Explorer" target="1.8" />
+      <module name="Droid-Explorer_main" target="1.8" />
+      <module name="Droid-Explorer_test" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
