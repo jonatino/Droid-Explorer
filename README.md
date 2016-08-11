@@ -1,12 +1,19 @@
-# DroidExplore
+# Droid-Explorer
+_Kotlin Based Cross-Platform Android File Manager_
 
-# Summary
+[![Build Status](https://travis-ci.org/Jonatino/Droid-Explorer.svg?branch=master)](https://travis-ci.org/Jonatino/Droid-Explorer)
+[![Dependency Status](https://www.versioneye.com/user/projects/578b0d13c3d40f004982a121/badge.svg?style=flat)](https://www.versioneye.com/user/projects/578b0d13c3d40f004982a121)
+[![license](https://img.shields.io/github/license/Jonatino/Droid-Explorer.svg?style=flat)](Apache License 2.0)
+
+This library is licensed under Apache License 2.0 and was created for debugging/testing security and functionality of your software.
+
+
 DroidExplore is an open source Kotlin library that provides file access to Android phones via ADB on Linux/Windows/MacOS X with NO need for extra libraries/apps!
 
-**NOTE** : DroidExplore requires **Java 1.8 u60** and above.
+**NOTE** : Droid-Explorer requires **Java 1.8 u40** and above.
 
-# How Can I Use DroidExplore?
- You can download the source code of the library and build it via Intellij/Eclipse with Kotlin plugin. Alternatively, releases will be pushed to GitHub once I feel it's ready for production :).
+# How Can I Use Droid-Explorer?
+Double click the run.bat to build the project. Once the build is finished, press any key to open Droid-Explorer.
 
 # Screenshots
 
