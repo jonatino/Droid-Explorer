@@ -3,7 +3,7 @@ _Kotlin Based Cross-Platform Android File Manager_
 
 [![Build Status](https://travis-ci.org/Jonatino/Droid-Explorer.svg?branch=master)](https://travis-ci.org/Jonatino/Droid-Explorer)
 [![Dependency Status](https://www.versioneye.com/user/projects/578b0d13c3d40f004982a121/badge.svg?style=flat)](https://www.versioneye.com/user/projects/578b0d13c3d40f004982a121)
-[![license](https://img.shields.io/github/license/Jonatino/Droid-Explorer.svg?style=flat)](Apache License 2.0)
+[![license](https://img.shields.io/github/license/Jonatino/Droid-Explorer.svg)](Apache License 2.0)
 
 This library is licensed under Apache License 2.0 and was created for debugging/testing security and functionality of your software.
 
