@@ -125,7 +125,6 @@ open class TextIconCell<T, S>() : TableCell<T, S>() {
                     contextMenu = rowMenu
                     cache.put(file.hashCode(), CachedFileCell(text, graphic, contextMenu, {
                         paste.isDisable = Clipboard.content.isEmpty()
-                        println("Called")
                     }))
                 } else {
                     text = labeled.text
