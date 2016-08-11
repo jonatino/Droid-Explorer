@@ -44,7 +44,7 @@ open class TextIconCell<T, S>() : TableCell<T, S>() {
     }
 
     override fun updateItem(item: S, empty: Boolean) {
-        super.updateItem(item, empty);
+        super.updateItem(item, empty)
         if (item == null || empty) {
             text = null
             graphic = null
@@ -93,7 +93,7 @@ open class TextIconCell<T, S>() : TableCell<T, S>() {
 
                     val upload = MenuItem("Upload", ImageView(Icons.UPLOAD.image))
                     upload.setOnAction {
-                        val files = FileChooser().showOpenMultipleDialog(droidExplorer.primaryStage);
+                        val files = FileChooser().showOpenMultipleDialog(droidExplorer.primaryStage)
                         if (files != null && files.isNotEmpty()) {
                             Mount().run()
                             files.forEach { Push(it.absolutePath, FileSystem.currentPath.absolutePath).run() { println(it) } }
@@ -104,9 +104,9 @@ open class TextIconCell<T, S>() : TableCell<T, S>() {
                     val delete = MenuItem("Delete", ImageView(Icons.DELETE.image))
 
                     delete.setOnAction {
-                        val alert = Alert(javafx.scene.control.Alert.AlertType.CONFIRMATION);
-                        alert.title = "Confirm File Deletion";
-                        alert.contentText = "Are you sure you want to delete \"$file\"? This action can NOT be reversed.";
+                        val alert = Alert(javafx.scene.control.Alert.AlertType.CONFIRMATION)
+                        alert.title = "Confirm File Deletion"
+                        alert.contentText = "Are you sure you want to delete \"$file\"? This action can NOT be reversed."
                         alert.headerText = null
 
                         val result = alert.showAndWait()
@@ -131,7 +131,7 @@ open class TextIconCell<T, S>() : TableCell<T, S>() {
                     text = labeled.text
                     graphic = labeled.graphic
                     contextMenu = labeled.contextMenu
-                    labeled?.action.invoke()
+                    labeled.action.invoke()
                 }
             }
         }
