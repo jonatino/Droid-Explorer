@@ -1,7 +1,7 @@
 @echo off
 title Droid-Explorer
 
-set bat="./build/install/droidexplorer/bin/droidexplorer.bat"
+set bat="./build/install/Droid-Explorer/bin/Droid-Explorer.bat"
 
 :loop
 if exist %bat% (

@@ -104,7 +104,7 @@ open class TextIconCell<T, S>() : TableCell<T, S>() {
                     val delete = MenuItem("Delete", ImageView(Icons.DELETE.image))
 
                     delete.setOnAction {
-                        val alert = Alert(javafx.scene.control.Alert.AlertType.CONFIRMATION)
+                        val alert = Alert(Alert.AlertType.CONFIRMATION)
                         alert.title = "Confirm File Deletion"
                         alert.contentText = "Are you sure you want to delete \"$file\"? This action can NOT be reversed."
                         alert.headerText = null
