@@ -24,6 +24,7 @@ import com.droid.explorer.filesystem.entry.Entry
 import com.droid.explorer.gui.Css
 import com.droid.explorer.gui.Icons
 import com.droid.explorer.gui.TextIconCell
+import com.droid.explorer.util.action
 import javafx.animation.Animation
 import javafx.animation.KeyFrame
 import javafx.animation.Timeline
@@ -114,16 +115,15 @@ class DroidExplorer : View() {
         refresh.graphic = Icons.REFRESH
         home.graphic = Icons.HOME
 
-        refresh.setOnAction({ FileSystem.refresh() })
-        home.setOnAction({ FileSystem.root.navigate() })
+        refresh.action = FileSystem::refresh
+        home.action = FileSystem.root::navigate
 
-        back.setOnAction({ FileSystem.back() })
-        forward.setOnAction({ FileSystem.forward() })
+        back.action = FileSystem::back
+        forward.action = FileSystem::forward
 
-        name.setCellFactory({ TextIconCell() })
+        name.setCellFactory { TextIconCell() }
 
         fileTable.onMouseClicked = EventHandler<MouseEvent> { mouseEvent ->
-            println(mouseEvent)
             if (mouseEvent.clickCount % 2 === 0) {
                 val file = fileTable.selectionModel.selectedItem
                 file?.navigate()
@@ -159,8 +159,6 @@ class DroidExplorer : View() {
             status.text = if (connected) "Connected" else "Disconnected"
             FileSystem.refresh()
         }
-
-    fun withSelected(block: (Entry) -> Unit) = fileTable.selectionModel.selectedItems.forEach { block(it) }
 
 }
 
