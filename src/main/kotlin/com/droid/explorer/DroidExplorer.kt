@@ -79,8 +79,6 @@ class DroidExplorer : View() {
 
     override val root: AnchorPane by fxml()
 
-    var connected: Boolean = false
-
     @FXML lateinit var fileTable: TableView<Entry>
     @FXML lateinit var name: TableColumn<Entry, String>
     @FXML lateinit var date: TableColumn<Entry, String>
@@ -140,10 +138,10 @@ class DroidExplorer : View() {
             val timeline = Timeline(KeyFrame(Duration.ZERO, EventHandler {
                 DeviceState().run() {
                     if (it == "unknown") {
-                        connected(false)
+                        connected = false
                     } else if (!connected && it == "device") {
                         DeviceSerial().run() {
-                            connected(true)
+                            connected = true
                         }
                     }
                 }
@@ -153,14 +151,14 @@ class DroidExplorer : View() {
         }
     }
 
-    fun connected(b: Boolean) {
-        connected = b
-
-        refresh.isDisable = !connected
-        if (!connected) fileTable.items.clear()
-        status.text = if (connected) "Connected" else "Disconnected"
-        FileSystem.refresh()
-    }
+    var connected: Boolean = false
+        set(value) {
+            field = value
+            refresh.isDisable = !connected
+            if (!connected) fileTable.items.clear()
+            status.text = if (connected) "Connected" else "Disconnected"
+            FileSystem.refresh()
+        }
 
     fun withSelected(block: (Entry) -> Unit) = fileTable.selectionModel.selectedItems.forEach { block(it) }
 
