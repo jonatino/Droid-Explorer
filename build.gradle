@@ -20,7 +20,7 @@ version = '1.2'
 apply plugin: 'kotlin'
 apply plugin: 'application'
 
-mainClassName = "com.droid.explorer.DroidExplorer"
+mainClassName = "com.droid.explorer.Main"
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8

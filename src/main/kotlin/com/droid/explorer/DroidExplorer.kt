@@ -27,7 +27,6 @@ import com.droid.explorer.gui.TextIconCell
 import javafx.animation.Animation
 import javafx.animation.KeyFrame
 import javafx.animation.Timeline
-import javafx.application.Application
 import javafx.event.EventHandler
 import javafx.fxml.FXML
 import javafx.scene.Scene
@@ -49,11 +48,6 @@ import kotlin.properties.Delegates.notNull
 /**
  * Created by Jonathan on 4/23/2016.
  */
-
-fun main(args: Array<String>) {
-    Application.launch(AppClass::class.java)
-}
-
 class AppClass : App() {
 
     override val primaryView = DroidExplorer::class
