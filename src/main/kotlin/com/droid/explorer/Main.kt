@@ -1,3 +1,5 @@
+@file:JvmName("Main")
+
 package com.droid.explorer
 
 import javafx.application.Application

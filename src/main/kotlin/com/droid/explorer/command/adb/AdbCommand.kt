@@ -16,9 +16,9 @@
 
 package com.droid.explorer.command.adb
 
-import com.droid.explorer.DroidExplorer
 import com.droid.explorer.command.Command
 import com.droid.explorer.command.adb.impl.Start
+import java.io.File
 import java.io.IOException
 import java.net.Socket
 
@@ -27,7 +27,7 @@ import java.net.Socket
  */
 abstract class AdbCommand : Command {
 
-    private val process by lazy { "\"${DroidExplorer::class.java.getResource("adb/adb.exe").toURI().path.substring(1)}\"" }
+    private val process by lazy { "\"${File("build/resources/main/com/droid/explorer/adb/adb.exe").absolutePath}\"" }
 
     override fun run(block: ((String) -> Unit)?) {
         try {
