@@ -1,4 +1,5 @@
 @echo off
+cd /d "%~dp0"
 title Droid-Explorer
 
 set bat="./build/install/Droid-Explorer/bin/Droid-Explorer.bat"
