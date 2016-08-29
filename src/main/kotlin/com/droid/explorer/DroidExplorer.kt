@@ -154,7 +154,6 @@ class DroidExplorer : View() {
     var connected: Boolean = false
         set(value) {
             field = value
-            refresh.isDisable = !connected
             if (!connected) fileTable.items.clear()
             status.text = if (connected) "Connected" else "Disconnected"
             FileSystem.refresh()
