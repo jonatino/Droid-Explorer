@@ -38,8 +38,8 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 
     compile "org.jetbrains.kotlin:kotlin-android-extensions:1.1-M01"
-
-    compile "no.tornado:tornadofx:1.5.4"
+	
+	compile "no.tornado:tornadofx:1.5.5"
     compile "org.controlsfx:controlsfx:8.40.11"
 }
 
