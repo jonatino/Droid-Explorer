@@ -35,19 +35,20 @@ repositories {
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 
-    compile "org.jetbrains.kotlin:kotlin-android-extensions:1.1-M01"
-	
     compile "no.tornado:tornadofx:1.5.5"
     compile "org.controlsfx:controlsfx:8.40.12"
 }
 
 buildscript {
-    ext.kotlin_version = '1.0.3'
+    ext.kotlin_version = '1.1-M01'
 
     repositories {
         mavenCentral()
+
+        maven {
+            url "http://dl.bintray.com/kotlin/kotlin-eap-1.1"
+        }
     }
 
     dependencies {
