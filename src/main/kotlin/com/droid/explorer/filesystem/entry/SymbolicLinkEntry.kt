@@ -22,5 +22,5 @@ package com.droid.explorer.filesystem.entry
 class SymbolicLinkEntry(parent: Entry?, name: String, date: String, permissions: String, val targetPath: String) : Entry(parent, name, date, permissions) {
 
     override val type = Type.SYMLINK
-
+	
 }

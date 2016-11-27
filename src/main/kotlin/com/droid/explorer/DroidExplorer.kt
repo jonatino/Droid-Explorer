@@ -29,7 +29,6 @@ import javafx.animation.Animation
 import javafx.animation.KeyFrame
 import javafx.animation.Timeline
 import javafx.event.EventHandler
-import javafx.fxml.FXML
 import javafx.scene.Scene
 import javafx.scene.control.*
 import javafx.scene.control.cell.PropertyValueFactory
@@ -50,114 +49,114 @@ import kotlin.properties.Delegates.notNull
  * Created by Jonathan on 4/23/2016.
  */
 class AppClass : App() {
-
-    override val primaryView = DroidExplorer::class
-
-    override fun start(stage: Stage) {
-        FX.primaryStage = stage
-        FX.application = this
-
-        try {
-            val view = find(primaryView)
-            droidExplorer = view
-
-            stage.apply {
-                scene = Scene(view.root)
-                scene.stylesheets.addAll(FX.stylesheets)
-                titleProperty().bind(view.titleProperty)
-                show()
-            }
-        } catch (ex: Exception) {
-            ex.printStackTrace()
-        }
-    }
-
+	
+	override val primaryView = DroidExplorer::class
+	
+	override fun start(stage: Stage) {
+		FX.primaryStage = stage
+		FX.application = this
+		
+		try {
+			val view = find(primaryView)
+			droidExplorer = view
+			
+			stage.apply {
+				scene = Scene(view.root)
+				scene.stylesheets.addAll(FX.stylesheets)
+				titleProperty().bind(view.titleProperty)
+				show()
+			}
+		} catch (ex: Exception) {
+			ex.printStackTrace()
+		}
+	}
+	
 }
 
 var droidExplorer by notNull<DroidExplorer>()
 
 class DroidExplorer : View() {
-
-    override val root: AnchorPane by fxml()
-
-    @FXML lateinit var fileTable: TableView<Entry>
-    @FXML lateinit var name: TableColumn<Entry, String>
-    @FXML lateinit var date: TableColumn<Entry, String>
-    @FXML lateinit var permissions: TableColumn<Entry, String>
-    @FXML lateinit var type: TableColumn<Entry, String>
-    @FXML lateinit var filePath: BreadCrumbBar<Entry>
-    @FXML lateinit var back: Button
-    @FXML lateinit var forward: Button
-    @FXML lateinit var refresh: Button
-    @FXML lateinit var home: Button
-    @FXML lateinit var status: Label
-
-    init {
-        Start().run()
-
-        title = "Droid Explorer"
-
-        primaryStage.minHeight = 300.0
-        primaryStage.minWidth = 575.0
-
-        name.cellValueFactory = PropertyValueFactory("name")
-        date.cellValueFactory = PropertyValueFactory("date")
-        permissions.cellValueFactory = PropertyValueFactory("permissions")
-        type.cellValueFactory = PropertyValueFactory("type")
-
-        fileTable.placeholder = Label("This folder is empty.")
-
-        stylesheets.add(Css.MAIN)
-        primaryStage.icons.add(Icons.FAVICON.image)
-
-        back.graphic = Icons.BACK
-        forward.graphic = Icons.FORWARD
-        refresh.graphic = Icons.REFRESH
-        home.graphic = Icons.HOME
-
-        refresh.action = FileSystem::refresh
-        home.action = FileSystem.root::navigate
-
-        back.action = FileSystem::back
-        forward.action = FileSystem::forward
-
-        name.setCellFactory { TextIconCell() }
-
-        fileTable.onMouseClicked = EventHandler<MouseEvent> { mouseEvent ->
-            if (mouseEvent.clickCount % 2 === 0) {
-                val file = fileTable.selectionModel.selectedItem
-                file?.navigate()
-            }
-        }
-
-        fileTable.selectionModel.selectionMode = SelectionMode.MULTIPLE
-
-        filePath.setOnCrumbAction { it.selectedCrumb.value!!.navigate() }
-
-        thread {
-            val timeline = Timeline(KeyFrame(Duration.ZERO, EventHandler {
-                DeviceState().run() {
-                    if (it == "unknown") {
-                        connected = false
-                    } else if (!connected && it == "device") {
-                        DeviceSerial().run() {
-                            connected = true
-                        }
-                    }
-                }
-            }), KeyFrame(Duration.millis(250.0)))
-            timeline.cycleCount = Animation.INDEFINITE
-            timeline.play()
-        }
-    }
-
-    var connected: Boolean = false
-        set(value) {
-            field = value
-            if (!connected) fileTable.items.clear()
-            status.text = if (connected) "Connected" else "Disconnected"
-            FileSystem.refresh()
-        }
-
+	
+	override val root: AnchorPane by fxml()
+	
+	val fileTable: TableView<Entry>  by fxid()
+	val name: TableColumn<Entry, String>  by fxid()
+	val date: TableColumn<Entry, String>  by fxid()
+	val permissions: TableColumn<Entry, String> by fxid()
+	val type: TableColumn<Entry, String> by fxid()
+	val filePath: BreadCrumbBar<Entry> by fxid()
+	val back: Button by fxid()
+	val forward: Button by fxid()
+	val refresh: Button by fxid()
+	val home: Button by fxid()
+	val status: Label by fxid()
+	
+	init {
+		Start().run()
+		
+		title = "Droid Explorer"
+		
+		primaryStage.minHeight = 300.0
+		primaryStage.minWidth = 575.0
+		
+		name.cellValueFactory = PropertyValueFactory("name")
+		date.cellValueFactory = PropertyValueFactory("date")
+		permissions.cellValueFactory = PropertyValueFactory("permissions")
+		type.cellValueFactory = PropertyValueFactory("type")
+		
+		fileTable.placeholder = Label("This folder is empty.")
+		
+		stylesheets.add(Css.MAIN)
+		primaryStage.icons.add(Icons.FAVICON.image)
+		
+		back.graphic = Icons.BACK
+		forward.graphic = Icons.FORWARD
+		refresh.graphic = Icons.REFRESH
+		home.graphic = Icons.HOME
+		
+		refresh.action = FileSystem::refresh
+		home.action = FileSystem.root::navigate
+		
+		back.action = FileSystem::back
+		forward.action = FileSystem::forward
+		
+		name.setCellFactory { TextIconCell() }
+		
+		fileTable.onMouseClicked = EventHandler<MouseEvent> { mouseEvent ->
+			if (mouseEvent.clickCount % 2 === 0) {
+				val file = fileTable.selectionModel.selectedItem
+				file?.navigate()
+			}
+		}
+		
+		fileTable.selectionModel.selectionMode = SelectionMode.MULTIPLE
+		
+		filePath.setOnCrumbAction { it.selectedCrumb.value!!.navigate() }
+		
+		thread {
+			val timeline = Timeline(KeyFrame(Duration.ZERO, EventHandler {
+				DeviceState().run() {
+					if (it == "unknown") {
+						connected = false
+					} else if (!connected && it == "device") {
+						DeviceSerial().run() {
+							connected = true
+						}
+					}
+				}
+			}), KeyFrame(Duration.millis(250.0)))
+			timeline.cycleCount = Animation.INDEFINITE
+			timeline.play()
+		}
+	}
+	
+	var connected: Boolean = false
+		set(value) {
+			field = value
+			if (!connected) fileTable.items.clear()
+			status.text = if (connected) "Connected" else "Disconnected"
+			FileSystem.refresh()
+		}
+	
 }
 

@@ -28,6 +28,7 @@ import com.droid.explorer.droidExplorer
 import com.droid.explorer.filesystem.FileSystem
 import com.droid.explorer.filesystem.entry.DirectoryEntry
 import com.droid.explorer.filesystem.entry.Entry
+import com.droid.explorer.util.selectedItems
 import com.droid.explorer.util.withSelected
 import javafx.scene.Node
 import javafx.scene.control.*
@@ -74,17 +75,16 @@ open class TextIconCell<S>() : TableCell<Entry, S>() {
 
                 val cut = MenuItem("Cut", ImageView(Icons.CUT.image))
                 cut.setOnAction {
-                    tableView.withSelected { Clipboard.content.put(it, CUT) }
+	                Clipboard.add(CUT, tableView.selectedItems())
                 }
                 val copy = MenuItem("Copy", ImageView(Icons.COPY.image))
                 copy.setOnAction {
-                    tableView.withSelected { Clipboard.content.put(it, COPY) }
+	                Clipboard.add(COPY, tableView.selectedItems())
                 }
                 paste.setOnAction {
-                    //Clipboard.moveTo(FileSystem.currentPath)
-                    Clipboard.content.forEach { entry, mode ->
-                        println("Moving $entry to ${FileSystem.currentPath.absolutePath}")
-                    }
+	                Mount().run()
+	                Clipboard.moveTo(FileSystem.currentPath)
+	                UnMount().run()
                 }
 
                 move.items.addAll(cut, copy, paste)
@@ -96,7 +96,7 @@ open class TextIconCell<S>() : TableCell<Entry, S>() {
                     val files = FileChooser().showOpenMultipleDialog(droidExplorer.primaryStage)
                     if (files != null && files.isNotEmpty()) {
                         Mount().run()
-                        files.forEach { Push(it.absolutePath, FileSystem.currentPath.absolutePath).run() { println(it) } }
+	                    files.forEach { Push(it.absolutePath, FileSystem.currentPath.absolutePath).run(::println) }
                         UnMount().run()
                     }
                 }
@@ -124,7 +124,7 @@ open class TextIconCell<S>() : TableCell<Entry, S>() {
                 graphic = ImageView(file.type.icon.image)
                 contextMenu = rowMenu
                 cache.put(file.hashCode(), CachedFileCell(text, graphic, contextMenu, {
-                    paste.isDisable = Clipboard.content.isEmpty()
+	                // paste.isDisable = Clipboard.isEmpty()
                 }))
             } else {
                 text = labeled.text

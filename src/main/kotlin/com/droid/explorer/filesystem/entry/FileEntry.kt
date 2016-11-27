@@ -22,5 +22,5 @@ package com.droid.explorer.filesystem.entry
 class FileEntry(parent: Entry?, name: String, date: String, permissions: String) : Entry(parent, name, date, permissions) {
 
     override val type = Type.FILE
-
+	
 }

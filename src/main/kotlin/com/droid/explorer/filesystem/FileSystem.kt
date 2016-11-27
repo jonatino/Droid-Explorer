@@ -45,13 +45,14 @@ object FileSystem {
 		droidExplorer.filePath.selectedCrumb = BreadCrumbBar.buildTreeModel(*path)
 		
 		val files = mutableListOf<Entry>()
-		ListFiles(currentPath.absolutePath, "-l").run() {
-			val entry = parseEntry(it);
+		ListFiles(currentPath.absolutePath, "-l").run {
+			val entry = parseEntry(it)
 			if (entry != null)
 				files.add(entry)
 		}
 		files.sortBy { it.type }
 		
+		currentPath.files = files
 		droidExplorer.fileTable.items = FXCollections.observableArrayList(files)
 		
 		droidExplorer.home.isDisable = currentPath.parent == null

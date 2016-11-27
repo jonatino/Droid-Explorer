@@ -9,6 +9,8 @@ import kotlin.reflect.KProperty
  */
 fun <T> TableView<T>.withSelected(block: (T) -> Unit) = selectionModel.selectedItems.forEach { block(it) }
 
+fun <T> TableView<T>.selectedItems() = selectionModel.selectedItems
+
 fun ButtonBase.onAction(block: () -> Unit) = setOnAction {
     block()
 }
