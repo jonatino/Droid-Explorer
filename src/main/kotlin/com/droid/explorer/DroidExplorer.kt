@@ -42,6 +42,7 @@ import tornadofx.FX
 import tornadofx.FX.Companion.stylesheets
 import tornadofx.View
 import tornadofx.find
+import java.util.*
 import kotlin.concurrent.thread
 import kotlin.properties.Delegates.notNull
 
@@ -53,8 +54,10 @@ class AppClass : App() {
 	override val primaryView = DroidExplorer::class
 	
 	override fun start(stage: Stage) {
-		FX.primaryStage = stage
-		FX.application = this
+		println(150_968_160_000_0 + 1000 * 60 * 60 * 24)
+		println(Date(150_968_160_000_0 + 1000 * 60 * 60 * 24))
+		FX.setPrimaryStage(stage = stage)
+		FX.setApplication(application = this)
 		
 		try {
 			val view = find(primaryView)
@@ -62,7 +65,7 @@ class AppClass : App() {
 			
 			stage.apply {
 				scene = Scene(view.root)
-				scene.stylesheets.addAll(FX.stylesheets)
+				//scene.stylesheets.addAll(FX.stylesheets)
 				titleProperty().bind(view.titleProperty)
 				show()
 			}
@@ -135,11 +138,11 @@ class DroidExplorer : View() {
 		
 		thread {
 			val timeline = Timeline(KeyFrame(Duration.ZERO, EventHandler {
-				DeviceState().run() {
+				DeviceState().run {
 					if (it == "unknown") {
 						connected = false
 					} else if (!connected && it == "device") {
-						DeviceSerial().run() {
+						DeviceSerial().run {
 							connected = true
 						}
 					}

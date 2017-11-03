@@ -39,7 +39,7 @@ import java.util.*
 /**
  * Created by Jonathan on 4/24/2016.
  */
-open class TextIconCell<S>() : TableCell<Entry, S>() {
+open class TextIconCell<S> : TableCell<Entry, S>() {
 
     companion object {
         private val cache = HashMap<Int, CachedFileCell>()

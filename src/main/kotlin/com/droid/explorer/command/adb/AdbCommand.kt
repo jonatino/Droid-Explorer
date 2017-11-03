@@ -26,32 +26,32 @@ import java.net.Socket
  * Created by Jonathan on 4/23/2016.
  */
 abstract class AdbCommand : Command {
-	
-	private val process by lazy { "\"${File("build/resources/main/com/droid/explorer/adb/adb.exe").absolutePath}\"" }
-	
-	override fun run(block: ((String) -> Unit)?) {
-		try {
-			before()
-			val process = ProcessBuilder(process, *args).start()
-			while (!isAdbServerOnline()) {
-			}
-			if (this !is Start) {
-				process.inputStream.reader().readLines().filterNot(String::isNullOrEmpty).forEach {
-					block?.invoke(it)
-				}
-			}
-		} finally {
-			after()
-		}
-	}
-	
-	fun isAdbServerOnline(): Boolean {
-		try {
-			Socket("localhost", 5037).close()
-			return true
-		} catch(e: IOException) {
-			return false
-		}
-	}
-	
+
+    private val process by lazy { "\"${File("build/resources/main/com/droid/explorer/adb/adb.exe").absolutePath}\"" }
+
+    override fun run(block: ((String) -> Unit)?) {
+        try {
+            before()
+            val process = ProcessBuilder(process, *args).start()
+            while (!isAdbServerOnline()) {
+            }
+            if (this !is Start) {
+                process.inputStream.reader().readLines().filterNot(String::isNullOrEmpty).forEach {
+                    block?.invoke(it)
+                }
+            }
+        } finally {
+            after()
+        }
+    }
+
+    fun isAdbServerOnline(): Boolean {
+        try {
+            Socket("localhost", 5037).close()
+            return true
+        } catch (e: IOException) {
+            return false
+        }
+    }
+
 }
