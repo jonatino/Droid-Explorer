@@ -15,7 +15,6 @@
  */
 
 .button {
-    -fx-skin: "com.sun.javafx.scene.control.skin.ButtonSkin";
     -fx-background-color: transparent;
     -fx-background-radius: 0 0 0 0;
     -fx-border-radius: 0 0 0 0;
@@ -43,7 +42,6 @@
 }
 
 .context-menu {
-    -fx-skin: "com.sun.javafx.scene.control.skin.ContextMenuSkin";
     -fx-background-color: #3d3d3d;
     -fx-background-insets: 0, 1, 2;
     -fx-background-radius: 0 6 6 6, 0 5 5 5, 0 4 4 4;
@@ -85,7 +83,6 @@
 }
 
 .table-view {
-    -fx-skin: "com.sun.javafx.scene.control.skin.TableViewSkin";
     -fx-background-color: #474747;
     -fx-background-insets: 0, 1;
     -fx-padding: 1;
@@ -127,19 +124,22 @@
     -fx-text-fill: #fff;
 }
 
-/* When the TableView is _not_ focused, we show alternate selection colors */
-
 .table-row-cell:filled:selected:focused,
 .table-row-cell:filled:selected {
     -fx-background-color: #6a6a6a;
 }
 
 .table-view:row-selection .table-row-cell:filled:hover {
-    -fx-background-color: #6ab344;
+	-fx-background-color: #6ab344 !important;
     -fx-background-insets: 0, 0 0 1 0;
     -fx-text-fill: #fff;
     -fx-table-cell-border-color: transparent;
     -fx-table-header-border-color: transparent;
+}
+
+.table-view:focused .table-row-cell:filled:selected:hover .table-cell {
+	-fx-background-color: #6ab344 !important;
+	-fx-text-fill: #fff;
 }
 
 .table-view:row-selection .table-row-cell:filled:focused:hover {
@@ -157,7 +157,6 @@
 }
 
 .table-cell {
-    -fx-skin: "com.sun.javafx.scene.control.skin.TableCellSkin";
     -fx-padding: 0.166667em;
     -fx-background-color: transparent;
     -fx-border-width: 0.083333em;

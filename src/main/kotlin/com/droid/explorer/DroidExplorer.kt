@@ -54,8 +54,6 @@ class AppClass : App() {
 	override val primaryView = DroidExplorer::class
 	
 	override fun start(stage: Stage) {
-		println(150_968_160_000_0 + 1000 * 60 * 60 * 24)
-		println(Date(150_968_160_000_0 + 1000 * 60 * 60 * 24))
 		FX.setPrimaryStage(stage = stage)
 		FX.setApplication(application = this)
 		
@@ -65,7 +63,7 @@ class AppClass : App() {
 			
 			stage.apply {
 				scene = Scene(view.root)
-				//scene.stylesheets.addAll(FX.stylesheets)
+                scene.stylesheets.addAll(FX.stylesheets)
 				titleProperty().bind(view.titleProperty)
 				show()
 			}
@@ -126,7 +124,7 @@ class DroidExplorer : View() {
 		name.setCellFactory { TextIconCell() }
 		
 		fileTable.onMouseClicked = EventHandler<MouseEvent> { mouseEvent ->
-			if (mouseEvent.clickCount % 2 === 0) {
+            if (mouseEvent.clickCount % 2 == 0) {
 				val file = fileTable.selectionModel.selectedItem
 				file?.navigate()
 			}
