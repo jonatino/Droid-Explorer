@@ -54,7 +54,8 @@ object FileSystem {
 		
 		currentPath.files = files
 		droidExplorer.fileTable.items = FXCollections.observableArrayList(files)
-		
+		droidExplorer.fileTable.selectionModel.select(currentPath.lastChild)
+		droidExplorer.fileTable.scrollTo(currentPath.lastChild)
 		droidExplorer.home.isDisable = currentPath.parent == null
 		droidExplorer.back.isDisable = currentPath.parent == null
 		droidExplorer.refresh.isDisable = !droidExplorer.connected
