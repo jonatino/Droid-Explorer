@@ -24,8 +24,8 @@ Note that I can not give any ETA regarding when certain features will be implmen
 
 # Screenshots
 
-![Alt text](https://dl.dropboxusercontent.com/u/91292881/ShareX/2016/04/java_2016-04-25_02-29-16.png "Gui Demo")
+![Alt text](https://dl.dropboxusercontent.com/s/q27kchfpvch7mhj/java_2016-04-25_02-29-16.png "Gui Demo")
 
-![Alt text](https://dl.dropboxusercontent.com/u/91292881/ShareX/2016/04/java_2016-04-25_02-30-31.png "Gui Demo")
+![Alt text](https://dl.dropboxusercontent.com/s/yorxud20tk0bqqu/java_2016-04-25_02-30-31.png "Gui Demo")
 
-![Alt text](https://dl.dropboxusercontent.com/u/91292881/ShareX/2016/05/idea_2016-05-22_15-59-05.png "Gui Demo")
+![Alt text](https://dl.dropboxusercontent.com/s/zkndsp13g3m06ow/idea_2016-05-22_15-59-05.png "Gui Demo")
