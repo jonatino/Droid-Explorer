@@ -17,7 +17,6 @@
 package com.droid.explorer.command.adb
 
 import com.droid.explorer.command.Command
-import com.droid.explorer.command.adb.impl.Start
 import java.io.File
 import java.io.IOException
 import java.net.Socket
@@ -35,7 +34,7 @@ abstract class AdbCommand : Command {
             val process = ProcessBuilder(process, *args).start()
             while (!isAdbServerOnline()) {
             }
-            if (this !is Start) {
+            if (readOutput) {
                 process.inputStream.reader().readLines().filterNot(String::isNullOrEmpty).forEach {
                     block?.invoke(it)
                 }
@@ -45,12 +44,12 @@ abstract class AdbCommand : Command {
         }
     }
 
-    fun isAdbServerOnline(): Boolean {
-        try {
+    private fun isAdbServerOnline(): Boolean {
+        return try {
             Socket("localhost", 5037).close()
-            return true
+            true
         } catch (e: IOException) {
-            return false
+            false
         }
     }
 

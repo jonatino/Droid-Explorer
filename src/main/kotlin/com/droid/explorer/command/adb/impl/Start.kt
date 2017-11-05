@@ -25,4 +25,6 @@ class Start : AdbCommand() {
 
     override val args = arrayOf("start-server")
 
+    override val readOutput = false
+
 }

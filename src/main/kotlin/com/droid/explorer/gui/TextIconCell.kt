@@ -58,7 +58,7 @@ open class TextIconCell<S> : TableCell<Entry, S>() {
                 when (file) {
                     is DirectoryEntry -> {
                         val open = MenuItem("Open", ImageView(Icons.OPEN.image))
-                        open.setOnAction { event -> file.navigate() }
+                        open.setOnAction { file.navigate() }
                         rowMenu.items.addAll(open, SeparatorMenuItem())
                     }
                 }
@@ -77,10 +77,12 @@ open class TextIconCell<S> : TableCell<Entry, S>() {
                 cut.setOnAction {
 	                Clipboard.add(CUT, tableView.selectedItems())
                 }
+
                 val copy = MenuItem("Copy", ImageView(Icons.COPY.image))
                 copy.setOnAction {
 	                Clipboard.add(COPY, tableView.selectedItems())
                 }
+
                 paste.setOnAction {
 	                Mount().run()
 	                Clipboard.moveTo(FileSystem.currentPath)

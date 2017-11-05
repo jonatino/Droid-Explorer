@@ -18,6 +18,7 @@ package com.droid.explorer
 
 import com.droid.explorer.command.adb.impl.DeviceSerial
 import com.droid.explorer.command.adb.impl.DeviceState
+import com.droid.explorer.command.adb.impl.Root
 import com.droid.explorer.command.adb.impl.Start
 import com.droid.explorer.filesystem.FileSystem
 import com.droid.explorer.filesystem.entry.Entry
@@ -79,21 +80,23 @@ var droidExplorer by notNull<DroidExplorer>()
 class DroidExplorer : View() {
 	
 	override val root: AnchorPane by fxml()
+
+    private val type: TableColumn<Entry, String> by fxid()
+    private val name: TableColumn<Entry, String>  by fxid()
+    private val status: Label by fxid()
 	
 	val fileTable: TableView<Entry>  by fxid()
-	val name: TableColumn<Entry, String>  by fxid()
 	val date: TableColumn<Entry, String>  by fxid()
 	val permissions: TableColumn<Entry, String> by fxid()
-	val type: TableColumn<Entry, String> by fxid()
 	val filePath: BreadCrumbBar<Entry> by fxid()
 	val back: Button by fxid()
 	val forward: Button by fxid()
 	val refresh: Button by fxid()
 	val home: Button by fxid()
-	val status: Label by fxid()
 	
 	init {
 		Start().run()
+        Root().run()
 		
 		title = "Droid Explorer"
 		

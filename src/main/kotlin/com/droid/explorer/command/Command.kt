@@ -23,6 +23,9 @@ interface Command {
 
     val args: Array<String>
 
+    val readOutput: Boolean
+        get() = true
+
     fun run(block: ((String) -> Unit)? = null)
 
     fun before() {
